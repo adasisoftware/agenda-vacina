@@ -6,6 +6,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use Adasi\Libraries\Twig;
 
 /**
  * Class BaseController
@@ -30,6 +31,14 @@ class BaseController extends Controller
 	protected $helpers = [];
 
 	/**
+	 * Controlador do Twig template
+	 *
+	 * @var Adasi\Libraries\Twig
+	 */
+	protected $twig;
+
+
+	/**
 	 * Constructor.
 	 *
 	 * @param RequestInterface  $request
@@ -45,5 +54,7 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.: $this->session = \Config\Services::session();
+
+		$this->twig = new Twig();
 	}
 }

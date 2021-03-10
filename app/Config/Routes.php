@@ -36,6 +36,11 @@ $routes->get('/', 'Auth::index');
 $routes->post('/login', 'Auth::logar');
 
 $routes->get('/dashboard', 'DashboardController::index');
+
+$routes->get('usuario/novo', 'UsuarioController::create');
+$routes->get('usuario/editar/(:alphanum)', 'UsuarioController::update/$1');
+$routes->post('usuario/save', 'UsuarioController::save');
+$routes->post('usuario/excluir', 'UsuarioController::delete');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

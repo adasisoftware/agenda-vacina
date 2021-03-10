@@ -12,5 +12,4 @@ class UsuarioModel extends Model{
         'email',
         'senha'
     ];
-
 }

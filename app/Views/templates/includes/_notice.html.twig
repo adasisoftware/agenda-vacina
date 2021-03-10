@@ -1,0 +1,23 @@
+{% if session.warning_notice %}
+	NioApp.Toast('{{ session.warning_notice }}', 'warning', {
+        position: 'top-right'
+    });
+{% endif %}
+
+{% if session.success_notice %}
+	NioApp.Toast('{{ session.success_notice }}', 'success', {
+        position: 'top-right'
+    });
+{% endif %}
+
+{% if session.info_notice %}
+	NioApp.Toast('{{ session.info_notice }}', 'info', {
+        position: 'top-right'
+    });
+{% endif %}
+
+{% if session.error_notice %}
+	NioApp.Toast('{{ session.error_notice }}', 'error', {
+        position: 'top-center'
+    });
+{% endif %}

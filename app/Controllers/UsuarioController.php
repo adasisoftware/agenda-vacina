@@ -11,10 +11,16 @@
 
 namespace App\Controllers;
 
+use App\Models\UsuarioModel;
+
 class UsuarioController extends BaseController
 {
 
     protected $baseRoute = 'usuario/';
+
+    public function __construct(){
+        $this->UsuarioModel = new UsuarioModel();
+    }
 	
     /**
      * carrega a lista de usuarios
@@ -60,6 +66,11 @@ class UsuarioController extends BaseController
         ]);
     }
 
+    /**
+     * exclusão de um registro
+     *
+     * @return void
+     */
     public function delete(){
         if ($this->request->getMethod() === 'post') {
             $id = hashDecode($this->request->getPost('id'));
@@ -72,6 +83,31 @@ class UsuarioController extends BaseController
             $this->session->setFlashdata('warning_notice','Usuario excluído com sucesso!');
             
             return $this->response->setJSON(true);
+        }
+    }
+
+    public function save(){
+        if ($this->request->getMethod() === 'post') {
+    
+            $form = $this->request->getPost();
+
+            $data = [
+                'nome' => trim($this->request->getPost('nome')),
+                'email' => trim($this->request->getPost('email')),
+                'senha' => trim($this->request->getPost('senha'))
+            ];
+            
+            if (\key_exists('id', $this->request->getPost()))
+                $data['id'] = $this->request->getPost('id');
+
+            $this->UsuarioModel->save($data);
+
+            if (\key_exists('id', $this->request->getPost()))
+                $this->session->setFlashdata('success_notice', 'Usuario atualizado com sucesso!');
+            else
+                $this->session->setFlashdata('success_notice', 'Usuario cadastrado com sucesso!');
+
+            return redirect()->to('/usuario');
         }
     }
 

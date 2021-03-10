@@ -36,6 +36,7 @@ class BaseController extends Controller
 	 * @var Adasi\Libraries\Twig
 	 */
 	protected $twig;
+	protected $session;
 
 
 	/**
@@ -56,5 +57,6 @@ class BaseController extends Controller
 		// E.g.: $this->session = \Config\Services::session();
 
 		$this->twig = new Twig();
+		$this->session = \Config\Services::session(); 
 	}
 }

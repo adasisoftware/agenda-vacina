@@ -35,7 +35,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Auth::index');
 $routes->post('/login', 'Auth::logar');
 
-
+$routes->get('/dashboard', 'DashboardController::index');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

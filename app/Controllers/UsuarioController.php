@@ -17,6 +17,7 @@ class UsuarioController extends BaseController
 {
 
     protected $baseRoute = 'usuario/';
+    protected $usuariosModel;
 
     public function __construct(){
         $this->UsuarioModel = new UsuarioModel();
@@ -57,7 +58,7 @@ class UsuarioController extends BaseController
      */
     public function update(string $id){
         $usuario = $this->UsuarioModel->find($id);
-
+        
         if(!$usuario){
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario não existe');
         }
@@ -72,21 +73,18 @@ class UsuarioController extends BaseController
     /**
      * exclusão de um registro
      *
+     * @param int $id
      * @return void
      */
-    public function delete(){
-        if ($this->request->getMethod() === 'post') {
-            $id = $this->request->getPost('id');
+    public function delete($id){
             
             $record = $this->UsuarioModel->find($id);
             if (!$record)
             return $this->response->setStatusCode(404, 'Usuario não existe!');
             
             $this->UsuarioModel->delete($id);
-            $this->session->setFlashdata('warning_notice','Usuario excluído com sucesso!');
             
-            return $this->response->setJSON(true);
-        }
+            return redirect()->to('/usuario');
     }
 
     public function save(){

@@ -12,4 +12,6 @@ class UsuarioModel extends Model{
         'email',
         'senha'
     ];
+
+    protected $returnType = 'object';
 }

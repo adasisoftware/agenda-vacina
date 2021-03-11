@@ -94,7 +94,7 @@ class UsuarioController extends BaseController
             $data = [
                 'nome' => trim($this->request->getPost('nome')),
                 'email' => trim($this->request->getPost('email')),
-                'senha' => trim($this->request->getPost('senha'))
+                'senha' => password_hash(trim($this->request->getPost('senha')), PASSWORD_DEFAULT)
             ];
             
             if (\key_exists('id', $this->request->getPost()))

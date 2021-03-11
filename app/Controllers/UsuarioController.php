@@ -29,8 +29,11 @@ class UsuarioController extends BaseController
      */
 	public function index()
 	{
+        $usuarios = $this->UsuarioModel->findAll();
+
 		return $this->twig->render('usuario/index.html.twig',[
             'title' => 'Usuarios do sistema',
+            'usuarios' => $usuarios,
             'baseRout' => $this->baseRoute
         ]);
 	}
@@ -53,16 +56,16 @@ class UsuarioController extends BaseController
      * @return void
      */
     public function update(string $hashid){
-        $user = $this->UsuarioModel->find(hashDecode($hashid));
+        $usuarios = $this->UsuarioModel->find(hashDecode($hashid));
 
-        if(!$user){
+        if(!$usuarios){
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario não existe');
         }
 
         return $this->twig->render('usuario/form.html.twig', [
             'baseRoute' => $this->baseRoute,
             'title' => 'Editar Usuario',
-            'user' => $user
+            'usuarios' => $usuarios
         ]);
     }
 

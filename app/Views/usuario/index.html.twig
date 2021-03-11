@@ -1,0 +1,51 @@
+{% extends 'templates/base.html.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Usuarios Cadastrado</h1>
+                    
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tabela de Usuarios</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>nome</th>
+                                            <th>email</th>
+                                            <th>ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for row in usuarios %}
+                                            <tr>
+                                                <td>{{ row.nome }}</td>
+                                                <td>{{ row.email }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ base_url('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+{% endblock %}

@@ -27,9 +27,12 @@
                                             <tr>
                                                 <td>{{ row.nome }}</td>
                                                 <td>{{ row.email }}</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info-circle"></i>
+                                                <td >
+                                                    <a href="{{ base_url(baseRoute) }}/editar/{{ row.id }}" class="btn btn-info btn-circle btn-sm">
+                                                        <i class="fas fa-user-edit"></i>
+                                                    </a>
+                                                    <a href="{{ base_url(baseRoute) }}/excluir/{{ row.id }}" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>

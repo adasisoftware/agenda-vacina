@@ -34,7 +34,7 @@ class UsuarioController extends BaseController
 		return $this->twig->render('usuario/index.html.twig',[
             'title' => 'Usuarios do sistema',
             'usuarios' => $usuarios,
-            'baseRout' => $this->baseRoute
+            'baseRoute' => $this->baseRoute
         ]);
 	}
 
@@ -45,27 +45,27 @@ class UsuarioController extends BaseController
      */
     public function create(){
         return $this->twig->render('usuario/form.html.twig',[
-            'title' => 'Cadastro de Usuario',
+            'title' => 'Crie um novo usuario aqui!',
         ]);
     }
 
     /**
      * carrega o formulario para alterar o usuario
      *
-     * @param string $hashid
+     * @param string $id
      * @return void
      */
-    public function update(string $hashid){
-        $usuarios = $this->UsuarioModel->find(hashDecode($hashid));
+    public function update(string $id){
+        $usuario = $this->UsuarioModel->find($id);
 
-        if(!$usuarios){
+        if(!$usuario){
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario não existe');
         }
 
         return $this->twig->render('usuario/form.html.twig', [
             'baseRoute' => $this->baseRoute,
             'title' => 'Editar Usuario',
-            'usuarios' => $usuarios
+            'usuario' => $usuario
         ]);
     }
 
@@ -76,7 +76,7 @@ class UsuarioController extends BaseController
      */
     public function delete(){
         if ($this->request->getMethod() === 'post') {
-            $id = hashDecode($this->request->getPost('id'));
+            $id = $this->request->getPost('id');
             
             $record = $this->UsuarioModel->find($id);
             if (!$record)

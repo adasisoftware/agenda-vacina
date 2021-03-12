@@ -37,9 +37,13 @@ $routes->post('/login', 'Auth::logar');
 
 $routes->get('/dashboard', 'DashboardController::index');
 
+
 $routes->get('/grupo', 'GrupoController::index');
 $routes->get('/grupo/novo', 'GrupoController::create');
 $routes->post('/grupo/save', 'GrupoController::save');
+
+
+// rots usuario
 
 $routes->get('/usuario', 'UsuarioController::index');
 $routes->get('/usuario/novo', 'UsuarioController::create');

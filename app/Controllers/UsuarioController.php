@@ -17,6 +17,7 @@ class UsuarioController extends BaseController
 {
 
     protected $baseRoute = 'usuario/';
+    protected $usuariosModel;
 
     public function __construct(){
         $this->UsuarioModel = new UsuarioModel();
@@ -34,7 +35,7 @@ class UsuarioController extends BaseController
 		return $this->twig->render('usuario/index.html.twig',[
             'title' => 'Usuarios do sistema',
             'usuarios' => $usuarios,
-            'baseRout' => $this->baseRoute
+            'baseRoute' => $this->baseRoute
         ]);
 	}
 
@@ -45,48 +46,45 @@ class UsuarioController extends BaseController
      */
     public function create(){
         return $this->twig->render('usuario/form.html.twig',[
-            'title' => 'Cadastro de Usuario',
+            'title' => 'Crie um novo usuario aqui!',
         ]);
     }
 
     /**
      * carrega o formulario para alterar o usuario
      *
-     * @param string $hashid
+     * @param string $id
      * @return void
      */
-    public function update(string $hashid){
-        $usuarios = $this->UsuarioModel->find(hashDecode($hashid));
-
-        if(!$usuarios){
+    public function update(string $id){
+        $usuario = $this->UsuarioModel->find($id);
+        
+        if(!$usuario){
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario não existe');
         }
 
         return $this->twig->render('usuario/form.html.twig', [
             'baseRoute' => $this->baseRoute,
             'title' => 'Editar Usuario',
-            'usuarios' => $usuarios
+            'usuario' => $usuario
         ]);
     }
 
     /**
      * exclusão de um registro
      *
+     * @param int $id
      * @return void
      */
-    public function delete(){
-        if ($this->request->getMethod() === 'post') {
-            $id = hashDecode($this->request->getPost('id'));
+    public function delete($id){
             
             $record = $this->UsuarioModel->find($id);
             if (!$record)
             return $this->response->setStatusCode(404, 'Usuario não existe!');
             
             $this->UsuarioModel->delete($id);
-            $this->session->setFlashdata('warning_notice','Usuario excluído com sucesso!');
             
-            return $this->response->setJSON(true);
-        }
+            return redirect()->to('/usuario');
     }
 
     public function save(){

@@ -77,7 +77,13 @@ class PacienteController extends BaseController
      * @return void
      */
     public function delete($id){
-        
+        $record = $this->PacienteModel->find($id);
+            if (!$record)
+            return $this->response->setStatusCode(404, 'Paciente não existe!');
+            
+            $this->PacienteModel->delete($id);
+            
+            return redirect()->to('/paciente');
     }
 
     public function save(){

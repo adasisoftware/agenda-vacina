@@ -41,6 +41,10 @@ $routes->get('/dashboard', 'DashboardController::index');
 $routes->get('/grupo', 'GrupoController::index');
 $routes->get('/grupo/novo', 'GrupoController::create');
 $routes->post('/grupo/save', 'GrupoController::save');
+$routes->get('/grupo/excluir/(:alphanum)', 'GrupoController::delete/$1');
+$routes->get('/grupo/editar/(:alphanum)', 'GrupoController::update/$1');
+
+
 
 
 // rots usuario

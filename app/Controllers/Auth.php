@@ -23,7 +23,7 @@ class Auth extends BaseController
             echo "<script>alert('E-mail e Senha Incorretos!');</script>";
             return $this->twig->render('auth/login.html.twig');
         } else {
-            return  $this->twig->render('dashboard/index.html.twig');
+            return redirect()->to('/dashboard');
         }
     }
 }

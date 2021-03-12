@@ -26,20 +26,52 @@ class GrupoController extends BaseController
 
     public function index()
     {
-
+        $grupo = $this->GrupoModel->findAll();
         return $this->twig->render('grupo/index.html.twig', [
             'title' => 'Grupos',
-            'baseRout' => $this->baseRoute
+            'baseRoute' => $this->baseRoute,
+            'grupo' => $grupo
         ]);
     }
 
-    public function create($hashid)
+    public function create()
     {
-        $usuarios = $this->UsuarioModel->find(hashDecode($hashid));
+
         return $this->twig->render('grupo/form.html.twig', [
-            'title' => 'Adicionar novo Grupo'
+            'title' => 'Adicionar novo Grupo',
+
         ]);
     }
+
+    public function update(string $id)
+    {
+        $grupo = $this->GrupoModel->find($id);
+
+        if (!$grupo) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario não existe');
+        }
+
+        return $this->twig->render('grupo/form.html.twig', [
+            'baseRoute' => $this->baseRoute,
+            'title' => 'Editar Grupo',
+            'grupo' => $grupo
+        ]);
+    }
+
+    public function delete($id)
+    {
+
+        $record = $this->GrupoModel->find($id);
+        if (!$record)
+            return $this->response->setStatusCode(404, 'Grupo não existe!');
+
+        $this->GrupoModel->delete($id);
+
+        return redirect()->to('/grupo');
+    }
+
+
+
 
     public function save()
     {

@@ -23,7 +23,7 @@
                                 placeholder="CPF" value="{{ paciente is defined ? paciente.cpf : ''}}">
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="#" class="form-control form-control-user"
+                            <input type="date" class="form-control form-control-user"
                                 id="data_nascimento" name="data_nascimento" placeholder="Data de Nacimento" value="{{ paciente is defined ? paciente.data_nascimento : ''}}">
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                id="Telefone" name="Telefone" placeholder="Telefone" value="{{ paciente is defined ? paciente.telefone : ''}}">
+                                id="telefone" name="telefone" placeholder="Telefone" value="{{ paciente is defined ? paciente.telefone : ''}}">
                         </div>
                     </div>
                     
@@ -47,4 +47,32 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block vendor %}
+    <script src="{{ base_url('/assets/js/inputmask/jquery.inputmask.min.js') }}"></script>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+
+        var Page = function() {
+
+            var _components = function() {
+                $('#telefone').inputmask({mask:["(99) 9999-9999","(99) 99999-9999"],keepStatic: true});
+                $('#cpf').inputmask('999.999.999.99'); 
+            };
+
+            return {
+				init: function() {
+					_components();
+				}
+			}
+        }();
+
+        document.addEventListener('DOMContentLoaded', function() {
+			Page.init();
+		}); 
+
+    </script>
 {% endblock %}

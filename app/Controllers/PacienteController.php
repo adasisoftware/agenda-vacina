@@ -57,7 +57,17 @@ class PacienteController extends BaseController
      * @return void
      */
     public function update(string $id){
-    
+        $paciente = $this->PacienteModel->find($id);
+        
+        if(!$paciente){
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Paciente não existe');
+        }
+
+        return $this->twig->render('paciente/form.html.twig', [
+            'baseRoute' => $this->baseRoute,
+            'title' => 'Editar Paciente',
+            'paciente' => $paciente
+        ]);
     }
 
     /**
@@ -71,7 +81,30 @@ class PacienteController extends BaseController
     }
 
     public function save(){
+        if ($this->request->getMethod() === 'post') {
+    
+            $form = $this->request->getPost();
+
+            $data = [
+                'nome' => trim($this->request->getPost('nome')),
+                'cpf' => trim($this->request->getPost('cpf')),
+                'data_nascimento' => trim($this->request->getPost('data_nascimento')),
+                'nome_mae' => trim($this->request->getPost('nome_mae')),
+                'telefone' => trim($this->request->getPost('telefone'))
+            ];
+            
+            if (\key_exists('id', $this->request->getPost()))
+                $data['id'] = $this->request->getPost('id');
+
+            $this->PacienteModel->save($data);
+
+            if (\key_exists('id', $this->request->getPost()))
+                $this->session->setFlashdata('success_notice', 'Paciente atualizado com sucesso!');
+            else
+                $this->session->setFlashdata('success_notice', 'Paciente cadastrado com sucesso!');
+
+            return redirect()->to('/paciente');
+        }
 
     }
-
 }

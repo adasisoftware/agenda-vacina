@@ -16,4 +16,12 @@ class PacienteModel extends Model{
     ];
 
     protected $returnType = 'object';
+
+    public function count()
+    {
+        return $this->db->table($this->table)
+                        ->select("count(*) qtde")
+                        ->get()
+                        ->getRow();
+    }
 }

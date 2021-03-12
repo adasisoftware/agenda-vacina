@@ -37,11 +37,19 @@ $routes->post('/login', 'Auth::logar');
 
 $routes->get('/dashboard', 'DashboardController::index');
 
+// rots usuario
 $routes->get('/usuario', 'UsuarioController::index');
 $routes->get('/usuario/novo', 'UsuarioController::create');
 $routes->get('/usuario/editar/(:alphanum)', 'UsuarioController::update/$1');
 $routes->post('/usuario/save', 'UsuarioController::save');
 $routes->get('/usuario/excluir/(:alphanum)', 'UsuarioController::delete/$1');
+
+// rots paciente
+$routes->get('/paciente', 'PacienteController::index');
+$routes->get('/paciente/novo', 'PacienteController::create');
+$routes->get('/paciente/editar/(:alphanum)', 'PacienteController::update/$1');
+$routes->post('/paciente/save', 'PacienteController::save');
+$routes->get('/paciente/excluir/(:alphanum)', 'PacienteController::delete/$1');
 
 /*
  * --------------------------------------------------------------------

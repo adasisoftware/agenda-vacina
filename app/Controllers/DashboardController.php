@@ -25,9 +25,11 @@ class DashboardController extends BaseController
 	public function index()
 	{
 		$pacienteTotal = $this->pacienteModel->count();
-		
+		$pacienteSemana = $this->pacienteModel->count_week();
+
 		return $this->twig->render('dashboard/index.html.twig',[
-			'pacienteTotal' => $pacienteTotal
+			'pacienteTotal' => $pacienteTotal,
+			'pacienteSemana' => $pacienteSemana
 		]);
 	}
 

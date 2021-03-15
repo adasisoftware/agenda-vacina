@@ -24,4 +24,9 @@ class PacienteModel extends Model{
                         ->get()
                         ->getRow();
     }
+
+    public function count_week()
+    {
+        return $this->db->table($this->table)->select("count(*) qtde")->where("date between CURRENT_DATE -7 and CURRENT_DATE")->get()->getRow();
+    }
 }

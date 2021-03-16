@@ -3,16 +3,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PacienteModel extends Model{
+class AgendamentoModel extends Model{
 
-    protected $table = 'paciente';
+    protected $table = 'agendamento';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'cpf',
-        'nome',
-        'nome_mae',
-        'data_nascimento',
-        'telefone'
+        'agenda_id',
+        'paciente_id',
+        'usuario_id',
     ];
 
     protected $returnType = 'object';

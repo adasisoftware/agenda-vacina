@@ -12,24 +12,31 @@
 namespace App\Controllers;
 
 use App\Models\PacienteModel;
+use App\Models\AgendamentoModel;
 
 class DashboardController extends BaseController
 {
 
 	protected $pacienteModel;
+	protected $agendamentoModel;
 
 	public function __construct(){
         $this->pacienteModel = new PacienteModel();
+		$this->agendamentoModel = new AgendamentoModel();
     }
 	
 	public function index()
 	{
 		$pacienteTotal = $this->pacienteModel->count();
 		$pacienteSemana = $this->pacienteModel->count_week();
+		$agendamentoTotal = $this->agendamentoModel->count();
+		$agendamentoSemana = $this->agendamentoModel->count_week();
 
 		return $this->twig->render('dashboard/index.html.twig',[
 			'pacienteTotal' => $pacienteTotal,
-			'pacienteSemana' => $pacienteSemana
+			'pacienteSemana' => $pacienteSemana,
+			'agendamentoTotal' => $agendamentoTotal,
+			'agendamentoSemana' => $agendamentoSemana
 		]);
 	}
 

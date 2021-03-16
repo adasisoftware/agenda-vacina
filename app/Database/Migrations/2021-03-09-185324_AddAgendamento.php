@@ -23,7 +23,8 @@ class AddAgendamento extends Migration
 			'usuario_id' => [
 				'type' => 'INT',
 
-			],					
+			],		
+			'created_at date DEFAULT current_date NOT NULL ',				
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->addForeignKey('agenda_id','agenda','id','CASCADE','RESTRICT');

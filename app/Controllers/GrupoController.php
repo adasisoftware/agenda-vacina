@@ -39,7 +39,8 @@ class GrupoController extends BaseController
 
         return $this->twig->render('grupo/form.html.twig', [
             'title' => 'Adicionar novo Grupo',
-
+            'baseRoute' => $this->baseRoute,
+            
         ]);
     }
 
@@ -69,9 +70,6 @@ class GrupoController extends BaseController
 
         return redirect()->to('/grupo');
     }
-
-
-
 
     public function save()
     {

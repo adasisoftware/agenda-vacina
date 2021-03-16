@@ -31,7 +31,7 @@ class AddPaciente extends Migration
 				'type' => 'VARCHAR',
 				'constraint' => '255',
 			],	
-			'date date DEFAULT current_date NOT NULL ',		
+			'created_at date DEFAULT current_date NOT NULL ',		
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->createTable('paciente');

@@ -37,13 +37,19 @@ $routes->post('/login', 'Auth::logar');
 
 $routes->get('/dashboard', 'DashboardController::index');
 
+//agenda
 $routes->get('/agenda', 'AgendaController::index');
 $routes->get('/agenda/novo', 'AgendaController::create');
 $routes->post('/agenda/save', 'AgendaController::save');
 $routes->get('/agenda/excluir/(:alphanum)', 'AgendaController::delete/$1');
 $routes->get('/agenda/editar/(:alphanum)', 'AgendaController::update/$1');
 
-
+//agendamento
+$routes->get('/agendamento', 'AgendamentoController::index');
+$routes->get('/agendamento/novo', 'AgendamentoController::create');
+$routes->post('/agendamento/save', 'AgendamentoController::save');
+$routes->get('/agendamento/excluir/(:alphanum)', 'AgendamentoController::delete/$1');
+$routes->get('/agendamento/editar/(:alphanum)', 'AgendamentoController::update/$1');
 
 // routs grupo
 $routes->get('/grupo', 'GrupoController::index');

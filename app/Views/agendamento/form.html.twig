@@ -1,0 +1,110 @@
+{% extends 'templates/base.html.twig' %}
+
+{% block content %}
+	<div class="row justify-content-end card-header py-3 ">
+		<a href="/agendamento" class="btn btn-primary btn-sm">
+			Voltar
+		</a>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-lg-8 ">
+			<div class="p-5">
+				<div class="text-center">
+					<h1 class="h4 text-gray-900 mb-4">{{ title }}</h1>
+				</div>
+				<form method="post" class="user center-block" action="{{ base_url('/agendamento/save') }}">
+
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="nome">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
+                        </div>
+                    </div>
+
+					<div class="form-group row">
+						<div class="col-sm-6 mb-3 mb-sm-0">
+							<select class="custom-select" id="agenda_id" name="agenda_id">
+								<option value="" disabled selected>Selecionar Agenda</option>
+								{% for a in agenda %}
+									<option value="{{ a.id }}">{% if a %}{{ a.grupo_id == grupo.id ? grupo.nome : '' }} {% endif %}</option>
+								{% endfor %}
+							</select>
+						</div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+							<select class="custom-select" id="pacientes_id" name="pacientes_id">
+								<option value="" disabled selected>Selecionar Paciente</option>
+								{% for p in pacientes %}
+									<option value="{{ p.id }}">{{ p.nome }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-12 mb-3 mb-sm-0">
+							<button class="btn btn-primary btn-user btn-block">Salvar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block vendor %}
+	<script src="{{ base_url('/assets/js/inputmask/jquery.inputmask.min.js') }}"></script>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript">
+
+		var Page = function () {
+
+            var _components = function () {
+                $('#telefone').inputmask({
+                mask: [
+                "(99) 9999-9999", "(99) 99999-9999"
+                ],
+                keepStatic: true
+                });
+                $('#cpf').inputmask('999.999.999.99');
+                };
+
+            var _events = function() {
+                $('#cpf').change(function(e){
+                    $('#nome').empty();
+                    if (this.value) {
+                        $.ajax({
+                            url: '{{ base_url('usuario/get-by-cpf') }}/' + $(this).val(),
+                            type: 'GET',
+                            dataType: 'json',
+                        })
+                        .done(function(result) {
+                            console.log(result);
+                        })
+                        .fail(function(e) {
+                            console.log(e);
+                        })
+                        .always(function() {
+                        });
+
+                    }
+                })
+            };  
+
+                return {
+                init: function () {
+                _components();
+                _events();
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                Page.init();
+            });
+	</script>
+{% endblock %}

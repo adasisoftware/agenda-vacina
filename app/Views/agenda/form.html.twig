@@ -2,7 +2,7 @@
 
 {% block content %}
 	<div class="row justify-content-end card-header py-3 ">
-		<a href="/paciente" class="btn btn-primary btn-sm">
+		<a href="/agenda" class="btn btn-primary btn-sm">
 			Voltar
 		</a>
 	</div>
@@ -23,17 +23,20 @@
 							<select class="custom-select" id="grupo_id" name="grupo_id">
 								<option value="" disabled selected>Selecionar Grupo</option>
 								{% for g in grupos %}
-									<option value="{{ g.id }}">{{ g.nome }}</option>
+									<option {% if g %}{{  g.id == agenda.grupo_id ? 'selected' : '' }} {% endif %}  value="{{ g.id }}">{{ g.nome }}</option>
 								{% endfor %}
 							</select>
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input type="number" class="form-control form-control-user" id="vagas" name="vagas" placeholder="Quantidades de Vagas">
+						<div class="col-sm-5 mb-3 mb-sm-0">
+							<input type="number" class="form-control form-control-user" id="vagas" name="vagas" placeholder="Quantidades de Vagas" value="{{ agenda is defined ? agenda.vagas : ''}}">
 						</div>
-						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input type="datetime-local" class="form-control form-control-user" id="data_hora" name="data_hora">
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							<input type="date" class="form-control form-control-user" id="data" name="data" value="{{ agenda is defined ? agenda.data_hora|date('Y-m-d') : 'now'|date('Y-m-d') }}">
+						</div>
+						<div class="col-sm-3 mb-3 mb-sm-0">
+							<input type="time" class="form-control form-control-user" id="hora" name="hora" value="{{ agenda is defined ? agenda.data_hora|date('H:i:s') : 'now'|date('H:i:s') }}">
 						</div>
 					</div>
 					<div class="form-group row">

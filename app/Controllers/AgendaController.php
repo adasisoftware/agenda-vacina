@@ -43,10 +43,12 @@ class AgendaController extends BaseController
 
     public function create(){
         $grupo = $this->GrupoModel->findAll();
+        $agenda = $this->AgendaModel->find();
         
         //dd($grupo);
         return $this->twig->render('agenda/form.html.twig',[
             'title' => 'Adicionar uma nova agenda',
+            'agenda' => $agenda,
             'grupos' => $grupo
         ]);
     }
@@ -88,10 +90,17 @@ class AgendaController extends BaseController
     {
         if ($this->request->getMethod() === 'post') {
 
+            $data_time = [
+                'data' => trim($this->request->getPost('data')),
+                'hora' => trim($this->request->getPost('hora'))
+            ];
+
             $data = [
                 'grupo_id' => trim($this->request->getPost('grupo_id')),
                 'data_hora' => trim($this->request->getPost('data_hora')),
                 'vagas' => trim($this->request->getPost('vagas')),
+                'data_hora' => $data_time['data'].' '.$data_time['hora'],
+
             ];
 
             //dd($data);

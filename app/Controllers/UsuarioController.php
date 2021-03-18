@@ -112,4 +112,12 @@ class UsuarioController extends BaseController
         }
     }
 
+    public function getByCpf(int $cpf){
+        $usuario = $this->UsuarioModel->where([
+            'cpf' => $cpf
+        ])->findAll();
+
+        return $this->response->setJSON($usuario);
+    }
+
 }

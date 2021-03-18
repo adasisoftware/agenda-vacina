@@ -93,7 +93,7 @@ class PacienteController extends BaseController
 
             $data = [
                 'nome' => trim($this->request->getPost('nome')),
-                'cpf' => trim($this->request->getPost('cpf')),
+                'cpf' => unmaskString($this->request->getPost('cpf')),
                 'data_nascimento' => trim($this->request->getPost('data_nascimento')),
                 'nome_mae' => trim($this->request->getPost('nome_mae')),
                 'telefone' => trim($this->request->getPost('telefone'))
@@ -111,6 +111,16 @@ class PacienteController extends BaseController
 
             return redirect()->to('/paciente');
         }
+    }
 
+    public function getByCpf(){
+        $cpf = unmaskString($this->request->getPost());
+
+        $paciente = $this->PacienteModel->where([
+            'cpf' => $cpf
+        ])->first();
+        //o first tras so a linha da consulta
+
+        return $this->response->setJSON($paciente);
     }
 }

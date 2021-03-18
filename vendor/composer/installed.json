@@ -1,6 +1,56 @@
 {
     "packages": [
         {
+            "name": "adasi/ci4-helper",
+            "version": "1.0.6",
+            "version_normalized": "1.0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adasisoftware/adasi-ci4-helper.git",
+                "reference": "ac0bb5a40f73de6c2cf90681eea4d129f5b59b1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adasisoftware/adasi-ci4-helper/zipball/ac0bb5a40f73de6c2cf90681eea4d129f5b59b1f",
+                "reference": "ac0bb5a40f73de6c2cf90681eea4d129f5b59b1f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "time": "2021-02-10T18:16:20+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Adasi\\Express\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ricardo Cerqueira",
+                    "email": "ricardo@adasi.com.br"
+                }
+            ],
+            "description": "Helper used in Adasi Software's CodeIgniter 4 projects.",
+            "keywords": [
+                "CI4",
+                "adasi-software",
+                "codeigniter4",
+                "helper",
+                "utils"
+            ],
+            "support": {
+                "issues": "https://github.com/adasisoftware/adasi-ci4-helper/issues",
+                "source": "https://github.com/adasisoftware/adasi-ci4-helper/tree/1.0.6"
+            },
+            "install-path": "../adasi/ci4-helper"
+        },
+        {
             "name": "codeigniter4/codeigniter4-standard",
             "version": "v1.1.1",
             "version_normalized": "1.1.1.0",

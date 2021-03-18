@@ -111,13 +111,4 @@ class UsuarioController extends BaseController
             return redirect()->to('/usuario');
         }
     }
-
-    public function getByCpf(int $cpf){
-        $usuario = $this->UsuarioModel->where([
-            'cpf' => $cpf
-        ])->findAll();
-
-        return $this->response->setJSON($usuario);
-    }
-
 }

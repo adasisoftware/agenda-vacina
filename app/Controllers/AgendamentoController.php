@@ -80,7 +80,7 @@ class AgendamentoController extends BaseController
      */
     public function update(string $id)
     {
-
+        
     }
 
     /**

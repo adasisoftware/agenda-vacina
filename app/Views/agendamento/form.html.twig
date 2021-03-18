@@ -16,14 +16,27 @@
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="nome">
+                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
+                        </div>
+                        
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control" id="nome" name="nome" value="" placeholder="Nome">
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row ">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
+                            <input type="text" class="form-control" id="nome_mae" name="nome_mae" value="" placeholder="Nome da mãe">
                         </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+							<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nacimento" value="">
+						</div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+							<input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" value="">
+						</div>
                     </div>
 
 					<div class="form-group row">
@@ -66,25 +79,31 @@
 
             var _components = function () {
                 $('#telefone').inputmask({
-                mask: [
-                "(99) 9999-9999", "(99) 99999-9999"
-                ],
-                keepStatic: true
+                    mask: [
+                        "(99) 9999-9999", "(99) 99999-9999"
+                    ],
+                    keepStatic: true
                 });
-                $('#cpf').inputmask('999.999.999.99');
-                };
+                $('#cpf').inputmask('999.999.999-99'); 
+            };
 
             var _events = function() {
-                $('#cpf').change(function(e){
-                    $('#nome').empty();
+                $('#cpf').blur(function(e){
+                    $('#nome').val('');
+                    var cpf = $(this).val()
                     if (this.value) {
                         $.ajax({
-                            url: '{{ base_url('usuario/get-by-cpf') }}/' + $(this).val(),
-                            type: 'GET',
+                            url: '{{ base_url('paciente/get-by-cpf') }}',
+                            type: 'POST',
                             dataType: 'json',
+                            data: { cpf: cpf},
                         })
                         .done(function(result) {
                             console.log(result);
+                            $('#nome').val(result.nome);
+                            $('#nome_mae').val(result.nome_mae);
+                            $('#data_nascimento').val(result.data_nascimento);
+                            $('#telefone').val(result.telefone);
                         })
                         .fail(function(e) {
                             console.log(e);
@@ -96,15 +115,16 @@
                 })
             };  
 
-                return {
+            return {
                 init: function () {
-                _components();
-                _events();
+                    _components();
+                    _events();
                 }
             }
+        }();
 
-            document.addEventListener('DOMContentLoaded', function () {
-                Page.init();
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+            Page.init();
+        });
 	</script>
 {% endblock %}

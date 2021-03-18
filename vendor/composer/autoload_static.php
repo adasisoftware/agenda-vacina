@@ -62,6 +62,10 @@ class ComposerStaticInit0a7e0bef3bded383393428aace331f0d
         array (
             'CodeIgniter\\' => 12,
         ),
+        'A' => 
+        array (
+            'Adasi\\Express\\' => 14,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -130,6 +134,10 @@ class ComposerStaticInit0a7e0bef3bded383393428aace331f0d
         'CodeIgniter\\' => 
         array (
             0 => __DIR__ . '/../..' . '/system',
+        ),
+        'Adasi\\Express\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/adasi/ci4-helper/src',
         ),
     );
 

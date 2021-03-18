@@ -22,4 +22,5 @@ return array(
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'CodeIgniter\\' => array($baseDir . '/system'),
+    'Adasi\\Express\\' => array($vendorDir . '/adasi/ci4-helper/src'),
 );

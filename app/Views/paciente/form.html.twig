@@ -58,25 +58,25 @@
 
 		var Page = function () {
 
-var _components = function () {
-$('#telefone').inputmask({
-mask: [
-"(99) 9999-9999", "(99) 99999-9999"
-],
-keepStatic: true
-});
-$('#cpf').inputmask('999.999.999.99');
-};
+			var _components = function () {
+				$('#telefone').inputmask({
+					mask: [
+						"(99) 9999-9999", "(99) 99999-9999"
+					],
+					keepStatic: true
+				});
+				$('#cpf').inputmask('999.999.999.99');
+			};
 
-return {
-init: function () {
-_components();
-}
-}
-}();
+			return {
+				init: function () {
+					_components();
+				}
+			}
+		}();
 
-document.addEventListener('DOMContentLoaded', function () {
-Page.init();
-});
+		document.addEventListener('DOMContentLoaded', function () {
+			Page.init();
+		});
 	</script>
 {% endblock %}

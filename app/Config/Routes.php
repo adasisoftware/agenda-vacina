@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth::index');
 $routes->post('/login', 'Auth::logar');
+$routes->get('/login/logout', 'Auth::logout');
 
 $routes->get('/dashboard', 'DashboardController::index');
 

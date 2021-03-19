@@ -101,7 +101,38 @@ class AgendamentoController extends BaseController
      */
     public function save()
     {
-        
+        if ($this->request->getMethod() === 'post') {
+
+            $paciente = [
+                'cpf' => unmaskString($this->request->getPost('cpf')),
+                'nome' => trim($this->request->getPost('nome')),
+                'nome_mae' => trim($this->request->getPost('nome_mae')),
+                'data_nascimento' => trim($this->request->getPost('data_nascimento')),
+                'telefone' => unmaskString($this->request->getPost('telefone')),
+            ];
+            //dd($paciente);
+
+            $data = [
+                'usuario_id' => $this->session->id,
+                'paciente_id'  => trim($this->request->getPost('paciente_id')),
+                'grupo_id' => trim($this->request->getPost('grupo_id')),
+                'agenda_id' => trim($this->request->getPost('agenda')),
+            ];
+            //dd($data);
+
+            if (\key_exists('id', $this->request->getPost()))
+                $data['id'] = $this->request->getPost('id');
+
+            //$this->PacienteModel->save($paciente);
+            $this->AgendamentoModel->save($data);
+
+            if (\key_exists('id', $this->request->getPost()))
+                $this->session->setFlashdata('success_notice', 'Agenda atualizado com sucesso!');
+            else
+                $this->session->setFlashdata('success_notice', 'Agenda cadastrado com sucesso!');
+
+            return redirect()->to('/agendamento/novo');
+        }
     }
 
 

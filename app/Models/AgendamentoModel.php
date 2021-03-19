@@ -9,6 +9,7 @@ class AgendamentoModel extends Model{
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'agenda_id',
+        'grupo_id',
         'paciente_id',
         'usuario_id',
     ];

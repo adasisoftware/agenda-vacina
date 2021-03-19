@@ -13,7 +13,7 @@
 					<h1 class="h4 text-gray-900 mb-4">{{ title }}</h1>
 				</div>
 				<form method="post" class="user center-block" action="{{ base_url('/agendamento/save') }}">
-
+                    <input type="hidden" name="paciente_id" id="paciente_id">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
@@ -41,7 +41,7 @@
 
 					<div class="form-group row">
 						<div class="col-sm-6 mb-3 mb-sm-0">
-							<select class="custom-select" id="grupo" name="grupo">
+							<select class="custom-select" id="grupo_id" name="grupo_id">
 								<option value="" disabled selected>Selecionar Grupo </option>
 								{% for grupo in grupos %}
 									<option value="{{ grupo.id }}">{{ grupo.nome }}</option>
@@ -98,6 +98,7 @@
                         })
                         .done(function(result) {
                             console.log(result);
+                            $('#paciente_id').val(result.id);
                             $('#nome').val(result.nome);
                             $('#nome_mae').val(result.nome_mae);
                             $('#data_nascimento').val(result.data_nascimento);
@@ -114,7 +115,7 @@
             };
 
             var _groups = function(){
-                $('#grupo').change(function(e){
+                $('#grupo_id').change(function(e){
                     $('#agenda').empty();
                     if (this.value) {
                         $.ajax({

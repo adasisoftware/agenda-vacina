@@ -61,13 +61,13 @@ class AgendamentoController extends BaseController
     public function create(){
         $agendamentos = $this->AgendamentoModel->findAll();
         $agenda = $this->AgendaModel->findAll();
-        $grupo = $this->GrupoModel->findAll();
+        $grupos = $this->GrupoModel->findAll();
         $pacientes = $this->PacienteModel->findAll();
 
         return $this->twig->render('agendamento/form.html.twig',[
             'title' => 'Crie um novo agendamento aqui!',
             'agenda' => $agenda,
-            'grupo' => $grupo,
+            'grupos' => $grupos,
             'pacientes' => $pacientes
         ]);
     }

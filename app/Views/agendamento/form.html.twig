@@ -29,7 +29,7 @@
                             <input type="text" class="form-control" id="nome_mae" name="nome_mae" value="" placeholder="Nome da mãe">
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-							<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nacimento" value="">
+							<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nacimento" value=" ">
 						</div>
                     </div>
 
@@ -41,19 +41,17 @@
 
 					<div class="form-group row">
 						<div class="col-sm-6 mb-3 mb-sm-0">
-							<select class="custom-select" id="agenda_id" name="agenda_id">
-								<option value="" disabled selected>Selecionar Agenda</option>
-								{% for a in agenda %}
-									<option value="{{ a.id }}">{% if a %}{{ a.grupo_id == grupo.id ? grupo.nome : '' }} {% endif %}</option>
+							<select class="custom-select" id="grupo" name="grupo">
+								<option value="" disabled selected>Selecionar Grupo </option>
+								{% for grupo in grupos %}
+									<option value="{{ grupo.id }}">{{ grupo.nome }}</option>
 								{% endfor %}
 							</select>
 						</div>
+
                         <div class="col-sm-6 mb-3 mb-sm-0">
-							<select class="custom-select" id="pacientes_id" name="pacientes_id">
-								<option value="" disabled selected>Selecionar Paciente</option>
-								{% for p in pacientes %}
-									<option value="{{ p.id }}">{{ p.nome }}</option>
-								{% endfor %}
+							<select class="custom-select" id="agenda" name="agenda">
+								<option value="">Selecionar Agenda</option>
 							</select>
 						</div>
 					</div>
@@ -113,12 +111,40 @@
 
                     }
                 })
-            };  
+            };
+
+            var _groups = function(){
+                $('#grupo').change(function(e){
+                    $('#agenda').empty();
+                    if (this.value) {
+                        $.ajax({
+                            url: '{{ base_url('/agenda/get-by-grupo') }}/' + $(this).val(),
+                            type: 'GET',
+                            dataType: 'json',
+                        })
+                        .done(function(result){
+                            console.log(result);
+                            $('#agenda').append('<option value=""></option>');
+                            $.each(result, function(){
+                                $('#agenda').append($('<option />').val(this.id).text(this.data_hora));
+                            });
+                        })
+                        .fail(function(e){
+                            console.log(e);
+                        })
+                        .always(function(){
+
+                        });
+                    }
+                })
+            };
+
 
             return {
                 init: function () {
                     _components();
                     _events();
+                    _groups();
                 }
             }
         }();

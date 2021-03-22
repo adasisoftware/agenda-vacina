@@ -118,6 +118,12 @@ class AgendaController extends BaseController
         }
     }
 
+    public function getByGrupo( $grupo ){
+        $agenda = $this->AgendaModel->where([
+            'grupo_id' => $grupo
+        ])->findAll();
 
+        return $this->response->setJSON($agenda);
+    }
 
 }

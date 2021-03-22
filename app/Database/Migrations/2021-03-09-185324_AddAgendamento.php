@@ -15,6 +15,10 @@ class AddAgendamento extends Migration
 			'agenda_id' => [
 				'type' => 'INT',
 
+			],
+			'grupo_id' => [
+				'type' => 'INT',
+
 			],			
 			'paciente_id' => [
 				'type' => 'INT',
@@ -28,6 +32,7 @@ class AddAgendamento extends Migration
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->addForeignKey('agenda_id','agenda','id','CASCADE','RESTRICT');
+		$this->forge->addForeignKey('grupo_id','grupo','id','CASCADE','RESTRICT');
 		$this->forge->addForeignKey('paciente_id','paciente','id','CASCADE','RESTRICT');
 		$this->forge->addForeignKey('usuario_id','usuario','id','CASCADE','RESTRICT');
 		$this->forge->createTable('agendamento');

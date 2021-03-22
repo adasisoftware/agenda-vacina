@@ -89,7 +89,13 @@ class AgendamentoController extends BaseController
      */
     public function delete($id)
     {
+        $record = $this->AgendamentoModel->find($id);
+        if(!$record)
+        return $this->response->setStatusCode(404, 'Agendamento não existe!');
 
+        $this->AgendamentoModel->delete($id);
+
+        return redirect()->to('/agendamento');
     }
 
     /**

@@ -42,7 +42,7 @@ $routes->get('/dashboard', 'DashboardController::index');
 $routes->get('/agenda', 'AgendaController::index');
 $routes->get('/agenda/novo', 'AgendaController::create');
 $routes->post('/agenda/save', 'AgendaController::save');
-$routes->get('/agenda/excluir/(:alphanum)', 'AgendaController::delete/$1');
+$routes->post('/agenda/excluir/(:alphanum)', 'AgendaController::delete/$1');
 $routes->get('/agenda/editar/(:alphanum)', 'AgendaController::update/$1');
 
 //agendamento

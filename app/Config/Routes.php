@@ -42,7 +42,7 @@ $routes->get('/dashboard', 'DashboardController::index');
 $routes->get('/agenda', 'AgendaController::index');
 $routes->get('/agenda/novo', 'AgendaController::create');
 $routes->post('/agenda/save', 'AgendaController::save');
-$routes->get('/agenda/excluir/(:alphanum)', 'AgendaController::delete/$1');
+$routes->post('/agenda/excluir/(:alphanum)', 'AgendaController::delete/$1');
 $routes->get('/agenda/editar/(:alphanum)', 'AgendaController::update/$1');
 $routes->get('/agenda/get-by-grupo/(:alphanum)', 'AgendaController::getByGrupo/$1');
 
@@ -50,14 +50,14 @@ $routes->get('/agenda/get-by-grupo/(:alphanum)', 'AgendaController::getByGrupo/$
 $routes->get('/agendamento', 'AgendamentoController::index');
 $routes->get('/agendamento/novo', 'AgendamentoController::create');
 $routes->post('/agendamento/save', 'AgendamentoController::save');
-$routes->get('/agendamento/excluir/(:alphanum)', 'AgendamentoController::delete/$1');
+$routes->post('/agendamento/excluir/(:alphanum)', 'AgendamentoController::delete/$1');
 $routes->get('/agendamento/editar/(:alphanum)', 'AgendamentoController::update/$1');
 
 // routs grupo
 $routes->get('/grupo', 'GrupoController::index');
 $routes->get('/grupo/novo', 'GrupoController::create');
 $routes->post('/grupo/save', 'GrupoController::save');
-$routes->get('/grupo/excluir/(:alphanum)', 'GrupoController::delete/$1');
+$routes->post('/grupo/excluir/(:alphanum)', 'GrupoController::delete/$1');
 $routes->get('/grupo/editar/(:alphanum)', 'GrupoController::update/$1');
 
 // rots usuario
@@ -65,7 +65,7 @@ $routes->get('/usuario', 'UsuarioController::index');
 $routes->get('/usuario/novo', 'UsuarioController::create');
 $routes->get('/usuario/editar/(:alphanum)', 'UsuarioController::update/$1');
 $routes->post('/usuario/save', 'UsuarioController::save');
-$routes->get('/usuario/excluir/(:alphanum)', 'UsuarioController::delete/$1');
+$routes->post('/usuario/excluir/(:alphanum)', 'UsuarioController::delete/$1');
 
 // rots paciente
 $routes->get('/paciente', 'PacienteController::index');
@@ -73,7 +73,7 @@ $routes->get('/paciente/novo', 'PacienteController::create');
 $routes->get('/paciente/editar/(:alphanum)', 'PacienteController::update/$1');
 $routes->post('/paciente/save', 'PacienteController::save');
 $routes->post('paciente/get-by-cpf', 'PacienteController::getByCpf');
-$routes->get('/paciente/excluir/(:alphanum)', 'PacienteController::delete/$1');
+$routes->post('/paciente/excluir/(:alphanum)', 'PacienteController::delete/$1');
 
 /*
  * --------------------------------------------------------------------

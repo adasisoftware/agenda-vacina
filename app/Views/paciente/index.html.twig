@@ -36,7 +36,7 @@
                                                     <a href="{{ base_url(baseRoute) }}/editar/{{ row.id }}" class="btn btn-info btn-circle btn-sm">
                                                         <i class="fas fa-user-edit"></i>
                                                     </a>
-                                                    <a href="{{ base_url(baseRoute) }}/excluir/{{ row.id }}" class="btn btn-danger btn-circle btn-sm">
+                                                    <a class="btn btn-danger btn-circle btn-sm" onclick="AlertaExcluir({{ row.id }});">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -56,6 +56,46 @@
 {% block script %}
     <script src="{{ base_url('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{ base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+    <script type="text/javascript">
+
+		function Excluir(id){
+			paramentros = {"id":id}
+			$.ajax({
+				data:paramentros,
+				url:'paciente/excluir/'+ id,
+				type:'POST',
+				beforeSend:function(){},
+				success:function(){
+					Swal.fire(
+					'Excluido!',
+					'Excluido Com Sucesso!.',
+					'success'
+					)
+				}
+			})
+		}
+
+		function AlertaExcluir(id){
+
+			Swal.fire({
+				title: 'Deseja Excluir?',
+				text: "Você não poderá reverter isso!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Sim, Desejo Apagar!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Excluir(id);
+					window.location.reload();					
+				}
+			})
+		}
+
+				
+	</script>
 
     
 {% endblock %}

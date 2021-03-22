@@ -32,4 +32,15 @@ class AgendamentoModel extends Model{
                         ->get()
                         ->getRow();
     }
+
+    public function getListAllData()
+    {
+        return $this->db->table($this->table)
+                        ->select("agendamento.id, agendamento.paciente_id, paciente.nome NomePaciente, agendamento.grupo_id, grupo.nome GrupoNome, agendamento.agenda_id, agenda.data_hora agendaDataHora")  
+                        ->join("paciente", "agendamento.paciente_id = paciente.id")
+                        ->join("grupo", "agendamento.grupo_id = grupo.id")
+                        ->join("agenda", "agendamento.agenda_id = agenda.id")
+                        ->get()
+                        ->getResult();
+    }
 }

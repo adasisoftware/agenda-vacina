@@ -22,23 +22,23 @@
 					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<thead>
 							<tr>
-								<th>Grupo</th>
-								<th>Data e Hora</th>
-								<th>Vagas</th>
+								<th>paciente</th>
+								<th>agenda</th>
+								<th>grupo</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
-							{% for row in agenda %}
+							{% for agendamento in agendamentos %}
 								<tr>
-									<td>{{ row.grupo_nome }}</td>
-									<td>{{ row.data_hora }}</td>
-									<td>{{ row.vagas }}</td>
+									<td>{{ agendamento.NomePaciente }}</td>
+									<td>{{ agendamento.agendaDataHora |date('d/m/Y H:i:s') }}</td>
+									<td>{{ agendamento.GrupoNome }}</td>
 									<td>
-										<a href="{{ base_url(baseRoute) }}/editar/{{ row.id }}" class="btn btn-info btn-circle btn-sm">
+										<a href="{{ base_url(baseRoute) }}/editar/{{ agendamento.id }}" class="btn btn-info btn-circle btn-sm">
 											<i class="fas fa-user-edit"></i>
 										</a>
-										<a href="{{ base_url(baseRoute) }}/excluir/{{ row.id }}" class="btn btn-danger btn-circle btn-sm">
+										<a href="{{ base_url(baseRoute) }}/excluir/{{ agendamento.id }}" class="btn btn-danger btn-circle btn-sm">
 											<i class="fas fa-trash"></i>
 										</a>
 									</td>

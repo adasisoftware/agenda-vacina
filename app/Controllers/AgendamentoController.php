@@ -42,13 +42,11 @@ class AgendamentoController extends BaseController
      */
 	public function index()
 	{
-        $agendamentos = $this->AgendamentoModel->findAll();
-        $agenda = $this->AgendaModel->findAll();
-        $pacientes = $this->PacienteModel->findAll();
+        $agendamentos = $this->AgendamentoModel->getListAllData();
         
 		return $this->twig->render('agendamento/index.html.twig',[
             'title' => 'Agendamento',
-            'agenda' => $agendamentos,
+            'agendamentos' => $agendamentos,
             'baseRoute' => $this->baseRoute
         ]);
 	}

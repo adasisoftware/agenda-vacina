@@ -43,4 +43,16 @@ class AgendamentoModel extends Model{
                         ->get()
                         ->getResult();
     }
+
+    public function getListById($id)
+    {
+        return $this->db->table($this->table)
+                        ->select("agendamento.id, agendamento.paciente_id, paciente.nome NomePaciente, paciente.nome_mae, paciente.data_nascimento, paciente.telefone, paciente.cpf, agendamento.grupo_id, grupo.nome GrupoNome, agendamento.agenda_id, agenda.data_hora AgendaDataHora")
+                        ->where("agendamento.id = $id" )  
+                        ->join("paciente", "agendamento.paciente_id = paciente.id")
+                        ->join("grupo", "agendamento.grupo_id = grupo.id")
+                        ->join("agenda", "agendamento.agenda_id = agenda.id")
+                        ->get()
+                        ->getRow();
+    }
 }

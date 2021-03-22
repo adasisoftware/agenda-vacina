@@ -78,7 +78,23 @@ class AgendamentoController extends BaseController
      */
     public function update(string $id)
     {
+        $agendamento = $this->AgendamentoModel->getListById($id);
+        $grupos = $this->GrupoModel->findAll();
+        $agendas = $this->AgendaModel->findAll();
         
+        //dd($agendamento);
+        
+        if(!$agendamento){
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Agendamento não existe');
+        }
+
+        return $this->twig->render('agendamento/form.html.twig', [
+            'baseRoute' => $this->baseRoute,
+            'title' => 'Editar Agendamento',
+            'agendamento' => $agendamento,
+            'grupos' => $grupos,
+            'agendas' => $agendas
+        ]);
     }
 
     /**
@@ -135,7 +151,7 @@ class AgendamentoController extends BaseController
             else
                 $this->session->setFlashdata('success_notice', 'Agenda cadastrado com sucesso!');
 
-            return redirect()->to('/agendamento/novo');
+            return redirect()->to('/agendamento');
         }
     }
 

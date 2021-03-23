@@ -32,7 +32,7 @@
 							{% for agendamento in agendamentos %}
 								<tr>
 									<td>{{ agendamento.NomePaciente }}</td>
-									<td>{{ agendamento.agendaDataHora |date('d/m/Y H:i:s') }}</td>
+									<td>{{ agendamento.agendaDataHora | date('d/m/Y H:i:s') }}</td>
 									<td>{{ agendamento.GrupoNome }}</td>
 									<td>
 										<a href="{{ base_url(baseRoute) }}/editar/{{ agendamento.id }}" class="btn btn-info btn-circle btn-sm">
@@ -43,7 +43,7 @@
 										</a>
 									</td>
 								</tr>
-							{% endfor %}
+							{% endfor %}	
 						</tbody>
 					</table>
 				</div>

@@ -106,6 +106,7 @@ class AgendamentoController extends BaseController
     public function delete($id)
     {
         $record = $this->AgendamentoModel->find($id);
+
         if(!$record)
         return $this->response->setStatusCode(404, 'Agendamento não existe!');
 
@@ -140,8 +141,8 @@ class AgendamentoController extends BaseController
             ];
             //dd($data);
 
-            if (\key_exists('id', $this->request->getPost()))
-                $data['id'] = $this->request->getPost('id');
+            if (\key_exists('agendamento_id', $this->request->getPost()))
+                $data['id'] = $this->request->getPost('agendamento_id');
 
             //$this->PacienteModel->save($paciente);
             $this->AgendamentoModel->save($data);

@@ -147,6 +147,8 @@ class AgendamentoController extends BaseController
             //$this->PacienteModel->save($paciente);
             $this->AgendamentoModel->save($data);
 
+            $this->popular_vagas($data['agenda_id']);
+
             if (\key_exists('id', $this->request->getPost()))
                 $this->session->setFlashdata('success_notice', 'Agenda atualizado com sucesso!');
             else
@@ -154,8 +156,18 @@ class AgendamentoController extends BaseController
 
             return redirect()->to('/agendamento');
         }
+
     }
 
+    public function popular_vagas($agenda_id){
+        $agenda = $this->AgendaModel->getAgendaRow($agenda_id);
 
+        if($agenda['vagas_restantes'] > 0)
+        {
+            $agenda['vagas_restantes'] = -1;
+            if(\key_exists('id', $agenda['id']))
+            $this->AgendaModel->save($agenda);
+        }
+    }
 
 }

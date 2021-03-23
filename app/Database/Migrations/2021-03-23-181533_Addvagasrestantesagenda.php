@@ -20,6 +20,8 @@ class Addvagasrestantesagenda extends Migration
 
 	public function down()
 	{
+		$fields = 'vagas_restantes';
+
 		$this->forge->dropColumn('agenda', $fields);
 	}
 }

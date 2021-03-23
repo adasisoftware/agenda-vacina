@@ -95,12 +95,14 @@ class AgendaController extends BaseController
                 'hora' => trim($this->request->getPost('hora'))
             ];
 
+            $vagas = trim($this->request->getPost('vagas'));
+
             $data = [
                 'grupo_id' => trim($this->request->getPost('grupo_id')),
                 'data_hora' => trim($this->request->getPost('data_hora')),
-                'vagas' => trim($this->request->getPost('vagas')),
+                'vagas_restantes' => $vagas,
+                'vagas' => $vagas,
                 'data_hora' => $data_time['data'].' '.$data_time['hora'],
-
             ];
 
             //dd($data);

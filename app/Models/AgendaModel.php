@@ -12,12 +12,12 @@ class AgendaModel extends Model
     protected $allowedFields = [
         'data_hora',
         'vagas',
-        'grupo_id'
+        'grupo_id',
+        'vagas_restantes'
     ];
 
     protected $returnType = 'object';
 
-       
     public function getAll()
     {
 

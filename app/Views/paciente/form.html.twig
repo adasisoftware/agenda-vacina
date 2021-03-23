@@ -24,6 +24,8 @@
 					<div class="form-group row">
 						<div class="col-sm-6 mb-3 mb-sm-0">
 							<input type="text" class="form-control form-control-user" id="cpf" name="cpf" placeholder="CPF" value="{{ paciente is defined ? paciente.cpf : ''}}">
+							<span id="cpf_invalido" class="d-none text-danger">cpf invalido</span>
+							<span id="cpf_valido" class="d-none text-success">cpf valido</span>
 						</div>
 						<div class="col-sm-6 mb-3 mb-sm-0">
 							<input type="date" class="form-control form-control-user" id="data_nascimento" name="data_nascimento" placeholder="Data de Nacimento" value="{{ paciente is defined ? paciente.data_nascimento : ''}}">
@@ -68,12 +70,57 @@
 				$('#cpf').inputmask('999.999.999.99');
 			};
 
+			var _validatorCpf = function () {
+				$('#cpf').blur(function(){
+					var numeros_cpf = $('#cpf').val().replace("-","").replace("/","").replace(/\./g,"");
+					
+					if(!TestaCPF(numeros_cpf)){
+						$('#cpf').addClass("is-invalid")
+						$('#cpf_invalido').removeClass("d-none");
+						$('#cpf_invalido').addClass("d-block");
+					}else{
+						$('#cpf').removeClass("is-invalid")
+						$('#cpf').addClass("is-valid")
+
+
+						$('#cpf_invalido').removeClass("d-block");
+						$('#cpf_invalido').addClass("d-none");
+						$('#cpf_valido').removeClass("d-none");
+						$('#cpf_valido').addClass("d-block");
+					}
+				})
+			}
+
+			function TestaCPF(strCPF) {
+				var Soma;
+				var Resto;
+				Soma = 0;
+				if (strCPF == "00000000000") return false;
+
+				for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+				Resto = (Soma * 10) % 11;
+
+				if ((Resto == 10) || (Resto == 11))  Resto = 0;
+				if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+				Soma = 0;
+				for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+				Resto = (Soma * 10) % 11;
+
+				if ((Resto == 10) || (Resto == 11))  Resto = 0;
+				if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+				return true;
+			}
+
 			return {
 				init: function () {
 					_components();
+					_validatorCpf();
 				}
 			}
 		}();
+
+		
 
 		document.addEventListener('DOMContentLoaded', function () {
 			Page.init();

@@ -144,6 +144,8 @@ class AgendamentoController extends BaseController
             if (\key_exists('agendamento_id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('agendamento_id');
 
+            $this->popular_vagas($data['agenda_id']);
+
             //$this->PacienteModel->save($paciente);
             $this->AgendamentoModel->save($data);
 
@@ -162,10 +164,10 @@ class AgendamentoController extends BaseController
     public function popular_vagas($agenda_id){
         $agenda = $this->AgendaModel->getAgendaRow($agenda_id);
 
-        if($agenda['vagas_restantes'] > 0)
+        if($agenda->vagas_restantes > 0)
         {
-            $agenda['vagas_restantes'] = -1;
-            if(\key_exists('id', $agenda['id']))
+            //tem q ver pq ele diminui 2
+            $agenda->vagas_restantes = $agenda->vagas_restantes -1;
             $this->AgendaModel->save($agenda);
         }
     }

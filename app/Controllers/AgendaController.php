@@ -122,7 +122,7 @@ class AgendaController extends BaseController
 
     public function getByGrupo( $grupo ){
         $agenda = $this->AgendaModel->where([
-            'grupo_id' => $grupo
+            'grupo_id' => $grupo, 'vagas_restantes >' => 0
         ])->findAll();
 
         return $this->response->setJSON($agenda);

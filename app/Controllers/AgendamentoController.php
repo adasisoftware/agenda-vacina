@@ -82,8 +82,6 @@ class AgendamentoController extends BaseController
         $grupos = $this->GrupoModel->findAll();
         $agendas = $this->AgendaModel->findAll();
         
-        //dd($agendamento);
-        
         if(!$agendamento){
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Agendamento não existe');
         }

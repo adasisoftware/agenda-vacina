@@ -63,4 +63,8 @@ class AgendamentoModel extends Model{
                     ->get()
                     ->getRow();
     }
+
+    public function vagasDisponiveis(){
+        
+    }
 }

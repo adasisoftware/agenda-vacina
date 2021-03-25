@@ -95,13 +95,10 @@ class AgendaController extends BaseController
                 'hora' => trim($this->request->getPost('hora'))
             ];
 
-            $vagas = trim($this->request->getPost('vagas'));
-
             $data = [
                 'grupo_id' => trim($this->request->getPost('grupo_id')),
                 'data_hora' => trim($this->request->getPost('data_hora')),
-                'vagas_restantes' => $vagas,
-                'vagas' => $vagas,
+                'vagas' => trim($this->request->getPost('vagas')),
                 'data_hora' => $data_time['data'].' '.$data_time['hora'],
             ];
 
@@ -121,8 +118,9 @@ class AgendaController extends BaseController
     }
 
     public function getByGrupo( $grupo ){
+
         $agenda = $this->AgendaModel->where([
-            'grupo_id' => $grupo, 'vagas_restantes >' => 0
+            'grupo_id' => $grupo
         ])->findAll();
 
         return $this->response->setJSON($agenda);

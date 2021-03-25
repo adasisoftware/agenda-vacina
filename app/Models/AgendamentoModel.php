@@ -55,4 +55,12 @@ class AgendamentoModel extends Model{
                         ->get()
                         ->getRow();
     }
+
+    public function getVagasCheck($agenda_id){
+        return $this->db->table($this->table)
+                    ->select("count(*) vagas_restantes")
+                    ->where("agenda_id = $agenda_id")
+                    ->get()
+                    ->getRow();
+    }
 }

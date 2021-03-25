@@ -29,12 +29,4 @@ class AgendaModel extends Model
 
         return $grupoQuery;
     }
-
-    public function getAgendaRow($agenda_id){
-        return $this->db->table($this->table)
-                    ->select("agenda.id, agenda.vagas_restantes")
-                    ->where("agenda.id = $agenda_id")
-                    ->get()
-                    ->getRow();
-    }
 }

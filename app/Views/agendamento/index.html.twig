@@ -38,7 +38,7 @@
 										<a href="{{ base_url(baseRoute) }}/editar/{{ agendamento.id }}" class="btn btn-info btn-circle btn-sm">
 											<i class="fas fa-user-edit"></i>
 										</a>
-										<a href="{{ base_url(baseRoute) }}/excluir/{{ agendamento.id }}" class="btn btn-danger btn-circle btn-sm">
+										<a class="btn btn-danger btn-circle btn-sm" onclick="AlertaExcluir({{ agendamento.id }});">
 											<i class="fas fa-trash"></i>
 										</a>
 									</td>

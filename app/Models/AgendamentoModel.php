@@ -56,15 +56,12 @@ class AgendamentoModel extends Model{
                         ->getRow();
     }
 
-    public function getVagasCheck($agenda_id){
+    public function countAgendados($agenda_id){
         return $this->db->table($this->table)
-                    ->select("count(*) vagas_restantes")
+                    ->select("count(*) agendados")
                     ->where("agenda_id = $agenda_id")
                     ->get()
-                    ->getRow();
-    }
-
-    public function vagasDisponiveis(){
-        
+                    ->getRow()
+                    ->agendados;
     }
 }

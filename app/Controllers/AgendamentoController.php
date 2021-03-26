@@ -163,14 +163,12 @@ class AgendamentoController extends BaseController
 
     public function verificar_vagas($agenda_id){
         //valor de quantas pessoas estao cadastradas em uma unica agenda
-        $check_vagas = $this->AgendamentoModel->getVagasCheck($agenda_id);
+        $countAgendados = $this->AgendamentoModel->countAgendados($agenda_id);
         $vagas_agenda = $this->AgendaModel->where([
             'id' => $agenda_id
         ])->first();
 
-        
-
-        if($check_vagas->vagas_restantes < $vagas_agenda->vagas){
+        if($countAgendados->vagas_restantes < $vagas_agenda->vagas){
             return true;
         }else{
             return false;

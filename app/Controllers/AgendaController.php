@@ -13,6 +13,7 @@ namespace App\Controllers;
 
 use App\Models\AgendaModel;
 use App\Models\GrupoModel;
+use App\Models\AgendamentoModel;
 
 class AgendaController extends BaseController
 {
@@ -22,6 +23,7 @@ class AgendaController extends BaseController
     public function __construct(){
         $this->AgendaModel = new AgendaModel();
         $this->GrupoModel = new GrupoModel();
+        $this->AgendamentoModel = new AgendamentoModel();
     }
 	
     /**
@@ -119,11 +121,21 @@ class AgendaController extends BaseController
 
     public function getByGrupo( $grupo ){
 
-        $agenda = $this->AgendaModel->where([
+        $agendas = $this->AgendaModel->where([
             'grupo_id' => $grupo
         ])->findAll();
 
-        return $this->response->setJSON($agenda);
+        $agendas_result = [];
+
+        foreach ($agendas as $agenda){
+            $agendados = $this->AgendamentoModel->countAgendados($agenda->id);
+
+            if($agenda->vagas - $agendados > 0 ){
+                $agendas_result[] = $agenda;
+            }
+        }
+
+        return $this->response->setJSON($agendas_result);
     }
 
 }

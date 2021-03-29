@@ -142,14 +142,9 @@ class AgendamentoController extends BaseController
             if (\key_exists('agendamento_id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('agendamento_id');
 
-            $verificacao_vagas = $this->verificar_vagas($data['agenda_id']);
-
-            if($verificacao_vagas == true){
-                //$this->PacienteModel->save($paciente);
-                $this->AgendamentoModel->save($data);
-            }else{
-                $this->session->setFlashdata('success_notice', 'Agenda cheia!');
-            }
+            //$this->PacienteModel->save($paciente);
+            $this->AgendamentoModel->save($data);
+        
 
             if (\key_exists('id', $this->request->getPost()))
                 $this->session->setFlashdata('success_notice', 'Agenda atualizado com sucesso!');
@@ -160,20 +155,4 @@ class AgendamentoController extends BaseController
         }
 
     }
-
-    public function verificar_vagas($agenda_id){
-        //valor de quantas pessoas estao cadastradas em uma unica agenda
-        $countAgendados = $this->AgendamentoModel->countAgendados($agenda_id);
-        $vagas_agenda = $this->AgendaModel->where([
-            'id' => $agenda_id
-        ])->first();
-
-        if($countAgendados->vagas_restantes < $vagas_agenda->vagas){
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-
 }

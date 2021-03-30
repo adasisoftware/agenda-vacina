@@ -57,7 +57,6 @@ class AgendamentoController extends BaseController
      * @return void
      */
     public function create(){
-        $agendamentos = $this->AgendamentoModel->findAll();
         $agenda = $this->AgendaModel->findAll();
         $grupos = $this->GrupoModel->findAll();
         $pacientes = $this->PacienteModel->findAll();
@@ -151,10 +150,10 @@ class AgendamentoController extends BaseController
                 $this->session->setFlashdata('success_notice', 'Agenda cheia!');
             }
 
-            if (\key_exists('id', $this->request->getPost()))
-                $this->session->setFlashdata('success_notice', 'Agenda atualizado com sucesso!');
+            if (\key_exists('agendamento_id', $this->request->getPost()))
+                $this->session->setFlashdata('success_notice', 'Agendamento atualizado com sucesso!');
             else
-                $this->session->setFlashdata('success_notice', 'Agenda cadastrado com sucesso!');
+                $this->session->setFlashdata('success_notice', 'Agendamento cadastrado com sucesso!');
 
             return redirect()->to('/agendamento');
         }

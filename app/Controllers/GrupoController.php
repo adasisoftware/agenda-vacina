@@ -86,6 +86,7 @@ class GrupoController extends BaseController
 
             if (\key_exists('id', $this->request->getPost()))
                 $this->session->setFlashdata('success_notice', 'Grupo atualizado com sucesso!');
+                
             else
                 $this->session->setFlashdata('success_notice', 'Grupo cadastrado com sucesso!');
 

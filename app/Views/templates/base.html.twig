@@ -19,10 +19,18 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ base_url('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    {# <link rel="stylesheet" href="{{ base_url('/assets/css/dashlite.css?ver=2.3.0') }}"> #}
+
+    <link href="{{ base_url('assets/plugins/toastr/toastr.min.css')}}">
+    {# <script src="{{ base_url('assets/plugins/toastr/toastr.min.js')}}"></script> #}
 
 </head>
 
 <body id="page-top">
+
+    <script lang="javascript">
+        {% include '/templates/includes/_notice.html.twig' %}
+    </script>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -98,6 +106,7 @@
     <script src="{{ base_url('assets/vendor/chart.js/Chart.min.js') }}"></script>
 
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     {% block script %}
     {% endblock %}

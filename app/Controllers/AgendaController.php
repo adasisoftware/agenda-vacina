@@ -131,6 +131,7 @@ class AgendaController extends BaseController
             $agendados = $this->AgendamentoModel->countAgendados($agenda->id);
 
             if($agenda->vagas - $agendados > 0 ){
+                $agenda->data_hora = date('d/m/Y H:i',strtotime($agenda->data_hora));
                 $agendas_result[] = $agenda;
             }
         }

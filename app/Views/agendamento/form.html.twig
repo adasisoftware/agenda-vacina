@@ -13,8 +13,11 @@
 					<h1 class="h4 text-gray-900 mb-4">{{ title }}</h1>
 				</div>
 				<form method="post" class="user center-block" action="{{ base_url('/agendamento/save') }}">
-                    <input type="hidden" name="paciente_id" id="paciente_id" value="{{ agendamento is defined ? agendamento.paciente_id : '' }}">
+                    {% if agendamento %}
                     <input type="hidden" name="agendamento_id" id="agendamento_id" value="{{ agendamento.id }}">
+					{% endif %}
+                    <input type="hidden" name="paciente_id" id="paciente_id" value="{{ agendamento is defined ? agendamento.paciente_id : '' }}">
+
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control" id="cpf"  name="cpf" placeholder="CPF" value="{{ agendamento is defined ? agendamento.cpf : '' }}">

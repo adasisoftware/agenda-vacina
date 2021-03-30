@@ -31,7 +31,7 @@
                                         {% for row in paciente %}
                                             <tr>
                                                 <td>{{ row.nome }}</td>
-                                                <td>{{ row.cpf }}</td>
+                                                <td>{{ row.cpf|mask_cpf_cnpj }}</td>
                                                 <td >
                                                     <a href="{{ base_url(baseRoute) }}/editar/{{ row.id }}" class="btn btn-info btn-circle btn-sm">
                                                         <i class="fas fa-user-edit"></i>
@@ -51,6 +51,10 @@
                 </div>
                 <!-- /.container-fluid -->
 
+{% endblock %}
+
+{% block vendor %}
+	<script src="{{ base_url('/assets/js/inputmask/jquery.inputmask.min.js') }}"></script>
 {% endblock %}
 
 {% block script %}
@@ -93,9 +97,5 @@
 				}
 			})
 		}
-
-				
 	</script>
-
-    
 {% endblock %}

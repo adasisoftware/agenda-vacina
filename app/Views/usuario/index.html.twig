@@ -97,7 +97,19 @@
 			})
 		}
 
-				
+
+
+    {% if session.success_notice %}
+		{# alert('{{ session.success_notice }}'); #}
+		Swal.fire({
+			position: 'top-end',
+			icon: 'success',
+			title: '{{ session.success_notice }}',
+			showConfirmButton: false,
+			imer: 1500
+			})
+	{% endif %}		
+
 	</script>
 
 

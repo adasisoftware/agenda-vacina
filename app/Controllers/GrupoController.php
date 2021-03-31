@@ -77,8 +77,10 @@ class GrupoController extends BaseController
 
             $data = [
                 'nome' => trim($this->request->getPost('nome')),
+                'idade_min' => trim($this->request->getPost('idade_min')),
+                'idade_max' => trim($this->request->getPost('idade_max')),
             ];
-
+           // dd($data);
             if (\key_exists('id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('id');
 

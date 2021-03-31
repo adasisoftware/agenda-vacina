@@ -16,6 +16,12 @@ class AddGrupo extends Migration
 				'type' => 'VARCHAR',
 				'constraint' => '255',
 			],			
+			'idade_min' => [
+				'type' => 'INT',
+			],			
+			'idade_max' => [
+				'type' => 'INT',
+			],			
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->createTable('grupo');

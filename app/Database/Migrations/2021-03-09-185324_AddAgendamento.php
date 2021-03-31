@@ -28,9 +28,15 @@ class AddAgendamento extends Migration
 				'type' => 'INT',
 
 			],		
+			'protocolo' => [
+				'type' => 'VARCHAR',
+				'constraint' => '10',
+
+			],		
 			'created_at date DEFAULT current_date NOT NULL ',				
 		]);
 		$this->forge->addKey('id', true);
+		$this->forge->addKey('protocolo');
 		$this->forge->addForeignKey('agenda_id','agenda','id','CASCADE','RESTRICT');
 		$this->forge->addForeignKey('grupo_id','grupo','id','CASCADE','RESTRICT');
 		$this->forge->addForeignKey('paciente_id','paciente','id','CASCADE','RESTRICT');

@@ -74,19 +74,18 @@
 				$('#cpf').blur(function(){
 					var numeros_cpf = $('#cpf').val().replace("-","").replace("/","").replace(/\./g,"");
 					
-					if(!TestaCPF(numeros_cpf)){
-						$('#cpf').addClass("is-invalid")
-						$('#cpf_invalido').removeClass("d-none");
-						$('#cpf_invalido').addClass("d-block");
-					}else{
-						$('#cpf').removeClass("is-invalid")
-						$('#cpf').addClass("is-valid")
-
-						$('#cpf_invalido').removeClass("d-block");
-						$('#cpf_invalido').addClass("d-none");
-						$('#cpf_valido').removeClass("d-none");
-						$('#cpf_valido').addClass("d-block");
+					if(TestaCPF(numeros_cpf) == false){
+						$('#cpf').addClass("is-invalid");
+						$('#cpf_valido').removeClass("d-block").addClass("d-none");
+						$('#cpf_invalido').removeClass("d-none").addClass("d-block");
 					}
+
+					if(TestaCPF(numeros_cpf) == true){
+						$('#cpf').removeClass("is-invalid").addClass("is-valid");
+						$('#cpf_invalido').removeClass("d-block").addClass("d-none");
+						$('#cpf_valido').removeClass("d-none").addClass("d-block");
+						
+					}	
 				})
 			}
 

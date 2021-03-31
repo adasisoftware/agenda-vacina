@@ -24,6 +24,8 @@
                                         <tr>
                                             <th>Nome</th>
                                             <th>CPF</th>
+                                            <th>Data de Nascimento</th>
+                                            <th>Idade</th>
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
@@ -32,6 +34,8 @@
                                             <tr>
                                                 <td>{{ row.nome }}</td>
                                                 <td>{{ row.cpf|mask_cpf_cnpj }}</td>
+                                                <td>{{ row.data_nascimento|date('d/m/y')}}</td>
+                                                <td>{{ row.idade}} anos</td>
                                                 <td >
                                                     <a href="{{ base_url(baseRoute) }}/editar/{{ row.id }}" class="btn btn-info btn-circle btn-sm">
                                                         <i class="fas fa-user-edit"></i>

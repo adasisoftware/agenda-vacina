@@ -95,6 +95,7 @@ class PacienteController extends BaseController
                 'nome' => trim($this->request->getPost('nome')),
                 'cpf' => unmaskString($this->request->getPost('cpf')),
                 'data_nascimento' => trim($this->request->getPost('data_nascimento')),
+                'idade' => trim($this->request->getPost('idade')),
                 'nome_mae' => trim($this->request->getPost('nome_mae')),
                 'telefone' => trim($this->request->getPost('telefone'))
             ];

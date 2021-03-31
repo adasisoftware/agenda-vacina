@@ -11,6 +11,7 @@ class PacienteModel extends Model{
         'cpf',
         'nome',
         'nome_mae',
+        'idade',
         'data_nascimento',
         'telefone'
     ];

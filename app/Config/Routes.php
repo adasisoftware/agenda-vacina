@@ -66,6 +66,7 @@ $routes->get('/usuario/novo', 'UsuarioController::create');
 $routes->get('/usuario/editar/(:alphanum)', 'UsuarioController::update/$1');
 $routes->post('/usuario/save', 'UsuarioController::save');
 $routes->post('/usuario/excluir/(:alphanum)', 'UsuarioController::delete/$1');
+$routes->post('/usuario/get-by-email', 'UsuarioController::getByEmail');
 
 // rots paciente
 $routes->get('/paciente', 'PacienteController::index');

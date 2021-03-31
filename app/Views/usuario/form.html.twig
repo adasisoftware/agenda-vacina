@@ -25,6 +25,8 @@
 					<div class="form-group row">
 						<div class="col-sm-12 mb-3 mb-sm-0">
 							<input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Email" value="{{ usuario is defined ? usuario.email : ''}}">
+							<span id="email_invalido" class="d-none text-danger">Emial já cadastrado</span>
+							<span id="email_valido" class="d-none text-success">Emial valido</span>
 						</div>
 					</div>
 
@@ -51,4 +53,57 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript">
+
+		var Page = function () {
+
+			var _email = function (){
+				$('#email').blur(function(e){
+					var email = $(this).val()
+					if(this.value){
+						$.ajax({
+							url: '{{ base_url('usuario/get-by-email') }}',
+							type: 'POST',
+							dataType: 'json',
+							data: { email: email }
+						})
+						.done(function(result){
+							
+							if(result != null){
+								$('#email').addClass("is-invalid");
+								$('#email_valido').removeClass("d-block").addClass("d-none");
+								$('#email_invalido').removeClass("d-none").addClass("d-block");
+							}else{
+								$('#email').removeClass("is-invalid").addClass("is-valid");
+								$('#email_invalido').removeClass("d-block").addClass("d-none");
+								$('#email_valido').removeClass("d-none").addClass("d-block");
+							}
+						})
+						.fail(function(e){
+							console.log(e);
+						})
+					}
+					
+				})
+			};
+
+			{# function verificarEmail(){
+				if()
+			} #}
+
+			return {
+				init: function () {
+					_email();
+				}
+			}
+
+		}();
+
+		document.addEventListener("DOMContentLoaded", function () {
+			Page.init();
+		});
+	</script>
 {% endblock %}

@@ -92,8 +92,6 @@ class UsuarioController extends BaseController
     
             $form = $this->request->getPost();
 
-            
-
             $data = [
                 'nome' => trim($this->request->getPost('nome')),
                 'email' => trim($this->request->getPost('email')),
@@ -116,5 +114,17 @@ class UsuarioController extends BaseController
 
             return redirect()->to('/usuario');
         }
+    }
+
+    public function getByEmail(){
+
+        $email = $this->request->getPost('email');
+
+        $emailUsuario = $this->UsuarioModel->where([
+            'email' => $email
+        ])->first();
+
+        return $this->response->setJSON($emailUsuario);
+
     }
 }

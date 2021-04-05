@@ -27,10 +27,12 @@ class GrupoController extends BaseController
     public function index()
     {
         $grupo = $this->GrupoModel->findAll();
+
+        // dd($grupo);
         return $this->twig->render('grupo/index.html.twig', [
             'title' => 'Grupos',
             'baseRoute' => $this->baseRoute,
-            'grupo' => $grupo
+            'grupo' => $grupo,
         ]);
     }
 

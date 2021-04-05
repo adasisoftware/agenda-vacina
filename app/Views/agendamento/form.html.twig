@@ -126,7 +126,7 @@
                     $('#agenda').empty();
                     if (this.value) {
                         $.ajax({
-                            url: '{{ base_url('/agenda/get-by-grupo') }}/' + $(this).val(),
+                            url: '{{ base_url('/agenda/get-by-grupo-verification') }}/' + $(this).val(),
                             type: 'GET',
                             dataType: 'json',
                         })

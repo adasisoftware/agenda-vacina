@@ -54,6 +54,11 @@ $routes->post('/agendamento/save', 'AgendamentoController::save');
 $routes->post('/agendamento/excluir/(:alphanum)', 'AgendamentoController::delete/$1');
 $routes->get('/agendamento/editar/(:alphanum)', 'AgendamentoController::update/$1');
 
+$routes->get('/agendamento/get-by-paciente/(:alphanum)', 'AgendamentoController::getByPaciente/$1');
+
+
+
+
 // routs grupo
 $routes->get('/grupo', 'GrupoController::index');
 $routes->get('/grupo/novo', 'GrupoController::create');

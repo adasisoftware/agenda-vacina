@@ -12,6 +12,7 @@ class AgendamentoModel extends Model{
         'grupo_id',
         'paciente_id',
         'usuario_id',
+        'protocolo',
     ];
 
     protected $returnType = 'object';

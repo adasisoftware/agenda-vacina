@@ -132,6 +132,7 @@ class AgendamentoController extends BaseController
 
             $data = [
                 'usuario_id' => $this->session->id,
+                'protocolo' => '1',
                 'paciente_id'  => trim($this->request->getPost('paciente_id')),
                 'grupo_id' => trim($this->request->getPost('grupo_id')),
                 'agenda_id' => trim($this->request->getPost('agenda')),
@@ -153,5 +154,14 @@ class AgendamentoController extends BaseController
             return redirect()->to('/agendamento');
         }
 
+    }
+
+    public function getByPaciente( $paciente ){
+
+        $pacientes = $this->AgendamentoModel->where([
+            'paciente_id' => $paciente 
+        ])->findAll();
+
+        return $this->response->setJSON($pacientes);
     }
 }

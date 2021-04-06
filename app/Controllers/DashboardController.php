@@ -37,11 +37,16 @@ class DashboardController extends BaseController
 		$agendamentoTotal = $this->agendamentoModel->count();
 		$agendamentoSemana = $this->agendamentoModel->count_week();
 
+		$ListaDeAgendamentos = $this->agendamentoModel->getListAllDashboard();
+
+		// dd($ListaDeAgendamentos);
+
 		return $this->twig->render('dashboard/index.html.twig',[
 			'pacienteTotal' => $pacienteTotal,
 			'pacienteSemana' => $pacienteSemana,
 			'agendamentoTotal' => $agendamentoTotal,
-			'agendamentoSemana' => $agendamentoSemana
+			'agendamentoSemana' => $agendamentoSemana,
+			'ListaDeAgendamentos' => $ListaDeAgendamentos
 		]);
 	}
 

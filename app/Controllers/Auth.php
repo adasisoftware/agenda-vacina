@@ -15,14 +15,22 @@ class Auth extends BaseController
 		// start session
         $this->session = \Config\Services::session();
     }
+
+    /**
+     * Traz a view de login
+     *
+     * @return void
+     */
     public function index()
     {
         return $this->twig->render('auth/login.html.twig');
-
-        
-
     }
 
+    /**
+     * Efetua verificação de login e redireciona para o dashboard
+     *
+     * @return void
+     */
     public function logar()
     {
         $loginModel = new UsuarioModel();
@@ -30,8 +38,7 @@ class Auth extends BaseController
 
         $user = $loginModel->where('email', $data['email'])
             ->first();
-        // dd($user);
-        //
+
         if (!$user || !password_verify($data['senha'], $user->senha)) {
             echo "<script>alert('E-mail e Senha Incorretos!');</script>";
             return $this->twig->render('auth/login.html.twig');
@@ -45,18 +52,11 @@ class Auth extends BaseController
         }
     }
 
-    public function mostrar(){
-        print_r(session()->get());
-    }
-
-    public function usuario(){
-        if(session()->has('email')){
-            echo 'Existe Usuario logado';
-        }else {
-            echo 'Não existe usuario logado';
-        }
-    }
-
+    /**
+     * Destroi a seção e desloga o usuario
+     *
+     * @return void
+     */
     public function logout(){
         session()->destroy();
         return redirect()->to('/');

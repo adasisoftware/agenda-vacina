@@ -24,7 +24,7 @@ class PacienteController extends BaseController
     }
 	
     /**
-     * carrega a lista de pacientes
+     * Carrega a lista de pacientes
      *
      * @return void
      */
@@ -40,7 +40,7 @@ class PacienteController extends BaseController
 	}
 
     /**
-     * chama a view para cadastro de um novo paciente do sistema
+     * Chama a view para cadastro de um novo paciente do sistema
      *
      * @return void
      */
@@ -51,7 +51,7 @@ class PacienteController extends BaseController
     }
 
     /**
-     * carrega o formulario para alterar o paciente
+     * Carrega o formulario para alterar o paciente
      *
      * @param string $id
      * @return void
@@ -71,7 +71,7 @@ class PacienteController extends BaseController
     }
 
     /**
-     * exclusão de um registro
+     * Exclusão de um registro
      *
      * @param int $id
      * @return void
@@ -86,6 +86,11 @@ class PacienteController extends BaseController
             return redirect()->to('/paciente');
     }
 
+    /**
+     * Salva um paciente
+     *
+     * @return void
+     */
     public function save(){
         if ($this->request->getMethod() === 'post') {
     
@@ -114,6 +119,11 @@ class PacienteController extends BaseController
         }
     }
 
+    /**
+     * Pega o paciente pelo cpf 
+     *
+     * @return void
+     */
     public function getByCpf(){
         $cpf = unmaskString($this->request->getPost());
 

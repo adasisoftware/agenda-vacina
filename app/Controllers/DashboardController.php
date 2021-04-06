@@ -25,6 +25,11 @@ class DashboardController extends BaseController
 		$this->agendamentoModel = new AgendamentoModel();
     }
 	
+	/**
+	 * Traz a view de dashboard
+	 *
+	 * @return void
+	 */
 	public function index()
 	{
 		$pacienteTotal = $this->pacienteModel->count();

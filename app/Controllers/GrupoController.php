@@ -24,11 +24,15 @@ class GrupoController extends BaseController
         $this->GrupoModel = new GrupoModel();
     }
 
+    /**
+     * View de lista de grupos
+     *
+     * @return void
+     */
     public function index()
     {
         $grupo = $this->GrupoModel->findAll();
 
-        // dd($grupo);
         return $this->twig->render('grupo/index.html.twig', [
             'title' => 'Grupos',
             'baseRoute' => $this->baseRoute,
@@ -36,9 +40,13 @@ class GrupoController extends BaseController
         ]);
     }
 
+    /**
+     * View de novo grupo
+     *
+     * @return void
+     */
     public function create()
     {
-
         return $this->twig->render('grupo/form.html.twig', [
             'title' => 'Adicionar novo Grupo',
             'baseRoute' => $this->baseRoute,
@@ -46,6 +54,12 @@ class GrupoController extends BaseController
         ]);
     }
 
+    /**
+     * Editar grupo
+     *
+     * @param string $id
+     * @return void
+     */
     public function update(string $id)
     {
         $grupo = $this->GrupoModel->find($id);
@@ -61,7 +75,13 @@ class GrupoController extends BaseController
         ]);
     }
 
-    public function delete($id)
+    /**
+     * Excluir grupo
+     *
+     * @param string $id
+     * @return void
+     */
+    public function delete(string $id)
     {
 
         $record = $this->GrupoModel->find($id);
@@ -73,6 +93,11 @@ class GrupoController extends BaseController
         return redirect()->to('/grupo');
     }
 
+    /**
+     * Salva um grupo
+     *
+     * @return void
+     */
     public function save()
     {
         if ($this->request->getMethod() === 'post') {

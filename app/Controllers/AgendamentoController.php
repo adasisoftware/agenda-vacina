@@ -36,7 +36,7 @@ class AgendamentoController extends BaseController
     }
 	
     /**
-     * carrega a lista de pacientes
+     * Carrega a lista de pacientes
      *
      * @return void
      */
@@ -52,7 +52,7 @@ class AgendamentoController extends BaseController
 	}
 
     /**
-     * chama a view para cadastrar um novo agendamento
+     * Chama a view para cadastrar um novo agendamento
      *
      * @return void
      */
@@ -70,7 +70,7 @@ class AgendamentoController extends BaseController
     }
 
     /**
-     * editar agendamento
+     * Editar agendamento
      *
      * @param string $id
      * @return void
@@ -95,7 +95,7 @@ class AgendamentoController extends BaseController
     }
 
     /**
-     * excluir agendamento
+     * Excluir agendamento
      *
      * @param [type] $id
      * @return void
@@ -113,7 +113,7 @@ class AgendamentoController extends BaseController
     }
 
     /**
-     * salva agendamento
+     * Salva agendamento
      *
      * @return void
      */
@@ -128,7 +128,6 @@ class AgendamentoController extends BaseController
                 'data_nascimento' => trim($this->request->getPost('data_nascimento')),
                 'telefone' => unmaskString($this->request->getPost('telefone')),
             ];
-            //dd($paciente);
 
             $data = [
                 'usuario_id' => $this->session->id,
@@ -137,7 +136,6 @@ class AgendamentoController extends BaseController
                 'grupo_id' => trim($this->request->getPost('grupo_id')),
                 'agenda_id' => trim($this->request->getPost('agenda')),
             ];
-            //dd($data);
 
             if (\key_exists('agendamento_id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('agendamento_id');
@@ -156,7 +154,13 @@ class AgendamentoController extends BaseController
 
     }
 
-    public function getByPaciente( $paciente ){
+    /**
+     * Verificar se há algum registro do paciente na tabela de agendamento
+     *
+     * @param string $paciente
+     * @return void
+     */
+    public function getByPaciente( string $paciente ){
 
         $pacientes = $this->AgendamentoModel->where([
             'paciente_id' => $paciente 

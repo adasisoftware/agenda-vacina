@@ -24,7 +24,7 @@ class UsuarioController extends BaseController
     }
 	
     /**
-     * carrega a lista de usuarios
+     * Carrega a lista de usuarios
      *
      * @return void
      */
@@ -40,7 +40,7 @@ class UsuarioController extends BaseController
 	}
 
     /**
-     * chama a view para cadastro de um novo usuario do sistema
+     * Chama a view para cadastro de um novo usuario do sistema
      *
      * @return void
      */
@@ -51,7 +51,7 @@ class UsuarioController extends BaseController
     }
 
     /**
-     * carrega o formulario para alterar o usuario
+     * Carrega o formulario para alterar o usuario
      *
      * @param string $id
      * @return void
@@ -71,7 +71,7 @@ class UsuarioController extends BaseController
     }
 
     /**
-     * exclusão de um registro
+     * Exclusão de um registro
      *
      * @param int $id
      * @return void
@@ -87,6 +87,11 @@ class UsuarioController extends BaseController
             return redirect()->to('/usuario');
     }
 
+    /**
+     * salva um novo usuario
+     *
+     * @return void
+     */
     public function save(){
         if ($this->request->getMethod() === 'post') {
     
@@ -116,6 +121,11 @@ class UsuarioController extends BaseController
         }
     }
 
+    /**
+     * verifica se o email ja esta cadastrado
+     *
+     * @return void
+     */
     public function getByEmail(){
 
         $email = $this->request->getPost('email');

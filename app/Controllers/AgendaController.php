@@ -27,7 +27,7 @@ class AgendaController extends BaseController
     }
 	
     /**
-     * carrega a lista de pacientes
+     * Carrega a lista de pacientes
      *
      * @return void
      */
@@ -35,7 +35,7 @@ class AgendaController extends BaseController
 	{
 
         $agendaQuerry = $this->AgendaModel->getAll();
-        //dd($agendaQuerry);
+        
 		return $this->twig->render('agenda/index.html.twig',[
             'title' => 'Agenda',
             'agenda' => $agendaQuerry,
@@ -43,6 +43,11 @@ class AgendaController extends BaseController
         ]);
 	}
 
+    /**
+     * Criar uma nova agenda
+     *
+     * @return void
+     */
     public function create(){
         $grupo = $this->GrupoModel->findAll();
         return $this->twig->render('agenda/form.html.twig',[
@@ -51,6 +56,12 @@ class AgendaController extends BaseController
         ]);
     }
 
+    /**
+     * Editar uma agenda
+     *
+     * @param string $id
+     * @return void
+     */
     public function update(string $id)
     {
         $agenda = $this->AgendaModel->find($id);
@@ -71,7 +82,7 @@ class AgendaController extends BaseController
 
 
     /**
-     * copiar agenda
+     * Copiar agenda
      *
      * @param string $id
      * @return void
@@ -95,7 +106,7 @@ class AgendaController extends BaseController
     }
 
     /**
-     * excluir agenda
+     * Excluir agenda
      *
      * @param string $id
      * @return void
@@ -113,7 +124,7 @@ class AgendaController extends BaseController
     }
 
     /**
-     * salvar agenda
+     * Salvar agenda
      *
      * @return void
      */
@@ -148,7 +159,7 @@ class AgendaController extends BaseController
     }
 
     /**
-     * pegar a agenda pelo id do grupo
+     * Pegar a agenda pelo id do grupo
      *
      * @param string $grupo
      * @return void
@@ -164,7 +175,7 @@ class AgendaController extends BaseController
 
 
     /**
-     * pegar a agenda pelo id do grupo e verificar se ela tem vaga ou nao
+     * Pegar a agenda pelo id do grupo e verificar se ela tem vaga ou nao
      *
      * @param string $grupo
      * @return void

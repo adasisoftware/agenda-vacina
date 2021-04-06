@@ -9,11 +9,13 @@ class Auth extends BaseController
 {
 
     protected $session;
+    protected $UsuarioModel;
 
     public function __construct()
 	{
 		// start session
         $this->session = \Config\Services::session();
+        $this->UsuarioModel = new UsuarioModel();
     }
 
     /**
@@ -33,11 +35,10 @@ class Auth extends BaseController
      */
     public function logar()
     {
-        $loginModel = new UsuarioModel();
         $data = $this->request->getPost();
 
-        $user = $loginModel->where('email', $data['email'])
-            ->first();
+        $user = $this->UsuarioModel->where('email', $data['email'])
+            ->first();    
 
         if (!$user || !password_verify($data['senha'], $user->senha)) {
             echo "<script>alert('E-mail e Senha Incorretos!');</script>";
@@ -48,6 +49,15 @@ class Auth extends BaseController
                 'nome' => $user->nome,
                 'id' => $user->id
             ]);
+
+            $ip = [
+                'id' => $user->id,
+                'dt_ultimo_acesso' => date('Y-m-d H:i:s'),
+                'ip_ultimo_acesso' => $this->request->getIPAddress()
+            ];
+
+            $this->UsuarioModel->save($ip);
+
             return redirect()->to('/dashboard');
         }
     }

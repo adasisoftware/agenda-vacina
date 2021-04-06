@@ -10,7 +10,9 @@ class UsuarioModel extends Model{
     protected $allowedFields = [
         'nome',
         'email',
-        'senha'
+        'senha',
+        'dt_ultimo_acesso',
+        'ip_ultimo_acesso'
     ];
 
     protected $returnType = 'object';

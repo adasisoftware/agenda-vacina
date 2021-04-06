@@ -139,7 +139,7 @@ class AgendamentoController extends BaseController
 
             if (\key_exists('agendamento_id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('agendamento_id');
-
+            
             //$this->PacienteModel->save($paciente);
             $this->AgendamentoModel->save($data);
         

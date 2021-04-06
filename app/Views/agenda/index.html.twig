@@ -41,6 +41,9 @@
 										<a class="btn btn-danger btn-circle btn-sm" onclick="AlertaExcluir({{ row.id }});">
 											<i class="fas fa-trash"></i>
 										</a>
+										<a href="{{ base_url(baseRoute) }}/copiar/{{row.id}}" class="btn btn-success btn-circle btn-sm">
+											<i class="fas fa-copy"></i>
+										</a>
 									</td>
 								</tr>
 							{% endfor %}

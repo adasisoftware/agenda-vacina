@@ -46,6 +46,7 @@ $routes->post('/agenda/excluir/(:alphanum)', 'AgendaController::delete/$1');
 $routes->get('/agenda/editar/(:alphanum)', 'AgendaController::update/$1');
 $routes->get('/agenda/get-by-grupo-verification/(:alphanum)', 'AgendaController::getByGrupoVerification/$1');
 $routes->get('/agenda/get-by-grupo/(:alphanum)', 'AgendaController::getByGrupo/$1');
+$routes->get('/agenda/copiar/(:alphanum)', 'AgendaController::copy/$1');
 
 //agendamento
 $routes->get('/agendamento', 'AgendamentoController::index');

@@ -56,7 +56,6 @@ class AgendaController extends BaseController
         $agenda = $this->AgendaModel->find($id);
         $grupo = $this->GrupoModel->findAll();
 
-
         if (!$agenda) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Agenda não existe');
         }
@@ -71,6 +70,36 @@ class AgendaController extends BaseController
     }
 
 
+    /**
+     * copiar agenda
+     *
+     * @param string $id
+     * @return void
+     */
+    public function copy(string $id){
+        $agenda = $this->AgendaModel->find($id);
+        unset($agenda->id);
+        $grupo = $this->GrupoModel->findAll();
+
+        if (!$agenda) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Agenda não existe');
+        }
+
+        return $this->twig->render('agenda/form.html.twig', [
+            'baseRoute' => $this->baseRoute,
+            'title' => 'Copiar Agenda',
+            'agenda' => $agenda,
+            'grupos' => $grupo
+
+        ]);
+    }
+
+    /**
+     * excluir agenda
+     *
+     * @param string $id
+     * @return void
+     */
     public function delete($id)
     {
 
@@ -83,7 +112,11 @@ class AgendaController extends BaseController
         return redirect()->to('/agenda');
     }
 
-
+    /**
+     * salvar agenda
+     *
+     * @return void
+     */
     public function save()
     {
         if ($this->request->getMethod() === 'post') {
@@ -100,10 +133,9 @@ class AgendaController extends BaseController
                 'data_hora' => $data_time['data'].' '.$data_time['hora'],
             ];
 
-            //dd($data);
             if (\key_exists('id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('id');
-            // dd($this->request->getPost('id'));
+    
             $this->AgendaModel->save($data);
 
             if (\key_exists('id', $this->request->getPost()))
@@ -115,7 +147,13 @@ class AgendaController extends BaseController
         }
     }
 
-    public function getByGrupo( $grupo ){
+    /**
+     * pegar a agenda pelo id do grupo
+     *
+     * @param string $grupo
+     * @return void
+     */
+    public function getByGrupo(string $grupo ){
 
         $agendas = $this->AgendaModel->where([
             'grupo_id' => $grupo
@@ -124,7 +162,14 @@ class AgendaController extends BaseController
         return $this->response->setJSON($agendas);
     }
 
-    public function getByGrupoVerification( $grupo ){
+
+    /**
+     * pegar a agenda pelo id do grupo e verificar se ela tem vaga ou nao
+     *
+     * @param string $grupo
+     * @return void
+     */
+    public function getByGrupoVerification(string $grupo ){
 
         $agendas = $this->AgendaModel->where([
             'grupo_id' => $grupo

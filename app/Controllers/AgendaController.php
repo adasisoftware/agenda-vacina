@@ -146,7 +146,7 @@ class AgendaController extends BaseController
 
             if (\key_exists('id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('id');
-    
+            
             $this->AgendaModel->save($data);
 
             if (\key_exists('id', $this->request->getPost()))
@@ -198,6 +198,18 @@ class AgendaController extends BaseController
         }
 
         return $this->response->setJSON($agendas_result);
+    }
+
+    public function verificationEditVagas(string $id_agenda){
+        
+        $agendaAntiga = $this->AgendaModel->find($id_agenda);
+        $agendados = $this->AgendamentoModel->countAgendados($agendaAntiga->id);
+        
+        return $this->response->setJSON([
+            'agendaAntiga' => $agendaAntiga,
+            'agendados' => $agendados
+        ]);
+
     }
 
 }

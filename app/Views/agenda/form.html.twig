@@ -15,7 +15,7 @@
 				<form method="post" class="user center-block" action="{{ base_url('/agenda/save') }}">
 
 					{% if agenda %}
-						<input type="hidden" name="id" value="{{ agenda.id }}"/>
+						<input type="hidden" id="id_agenda" name="id" value="{{ agenda.id }}"/>
 					{% endif %}
 
 					<div class="form-group row">
@@ -48,4 +48,49 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript"> 
+
+		var Page = function () {
+
+			var _verificationVagas = function(){
+				$('#vagas').blur(function(e){
+					
+					var id_agenda = $('#id_agenda').val();
+					var vagas = $('#vagas').val();
+
+					if(this.value) {
+						$.ajax({
+							url: '{{ base_url('agenda/verification-edit-vagas') }}/' + id_agenda,
+							type: 'GET',
+							dataType: 'json'
+						})
+						.done(function(result){
+							if( Number(result.agendados) > Number(vagas) ){
+								Swal.fire(
+									'O numero de vagas tem q ser maior que ou igual há ' + result.agendados,
+									'',
+									'warning'
+								)
+							}
+						})
+					}
+					
+				});
+			}
+
+			return {
+				init: function(){
+					_verificationVagas();
+				}
+			}
+		}();
+
+		document.addEventListener('DOMContentLoaded', function () {
+            Page.init();
+        });
+
+	</script>
 {% endblock %}

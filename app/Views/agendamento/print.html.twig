@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agenda Vacina - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{{base_url('assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{{ base_url('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    {# <link rel="stylesheet" href="{{ base_url('/assets/css/dashlite.css?ver=2.3.0') }}"> #}
+
+    <link href="{{ base_url('assets/plugins/toastr/toastr.min.css')}}">
+    {# <script src="{{ base_url('assets/plugins/toastr/toastr.min.js')}}"></script> #}
+
+</head>
+
+<body id="page-top">
+
+    <div class="row justify-content-center">
+		<div class="col-lg-8 ">
+			<div class="p-5">
+				<div class="text-center">
+					<h1 class="h1 text-gray-900 mb-4">{{ title }}</h1>
+				</div>
+                <div class="text-center">
+					<h3 class="h3 text-gray-900 mb-4">{{ grupo.nome }}</h1>
+				</div>
+
+                <div class="row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <p class="h1 text-gray-900">Paciente: {{ paciente is defined ? paciente.nome : 'nao cadastrou paciente'  }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <table class="table table-hover">
+                        <thead>
+							<tr class="table-primary">
+								<th>CPF</th>
+								<th>Telefone</th>
+                                <th>Idade</th>
+							</tr>
+						</thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ paciente.cpf }}</td>
+                                <td>{{ paciente.telefone }}</td>
+                                <td>{{ paciente.idade | date('d/m/Y') }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <table class="table table-hover">
+                        <thead>
+							<tr class="table-primary">
+								<th>Data</th>
+                                <th>Hora</th>
+								<th>Protocolo</th>
+							</tr>
+						</thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ agenda.data_hora | date('d/m/Y') }}</td>
+                                <td>{{ agenda.data_hora | date('H:m') }}</td>
+                                <td>{{ agendamento.protocolo }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row text-center">
+                    <h5><strong>Atenção!</strong> No dia da vacinação, levar documento oficial com foto, cópia do CPF e comprovante de residência</h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <button class="btn btn-primary btn-user btn-block">Imprimir</button>
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <button class="btn btn-success btn-user btn-block">Finalizar</button>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ base_url('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ base_url('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    {% block vendor %}
+    {% endblock %}
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ base_url('assets/js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ base_url('assets/vendor/chart.js/Chart.min.js') }}"></script>
+
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% block script %}
+    {% endblock %}
+
+    <!-- Page level custom scripts -->
+    {# <script src="{{ base_url('assets/js/demo/chart-area-demo.js') }}"></script> #}
+    {# <script src="{{ base_url('assets/js/demo/chart-pie-demo.js') }}"></script> #}
+
+</body>
+
+</html>

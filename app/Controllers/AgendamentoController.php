@@ -113,6 +113,32 @@ class AgendamentoController extends BaseController
     }
 
     /**
+     * trasa view para imprimir os dados de agendamento
+     *
+     * @param string $id
+     * @return void
+     */
+    public function printScreen(string $id ) {
+
+        $agendamento = $this->AgendamentoModel->find($id);
+        
+        $agenda = $this->AgendaModel->find($agendamento->agenda_id);
+        $grupo = $this->GrupoModel->find($agendamento->grupo_id);
+        $paciente = $this->PacienteModel->find($agendamento->paciente_id);
+
+        // dd($agendamento, $agenda, $grupo, $paciente);
+
+        return  $this->twig->render('agendamento/print.html.twig', [
+            'agendamento' => $agendamento,
+            'agenda' => $agenda,
+            'grupo' => $grupo,
+            'paciente' => $paciente,
+            'title' => 'Comprovante de Agendamento'
+        ]);
+
+    }
+
+    /**
      * Salva agendamento
      *
      * @return void
@@ -142,14 +168,15 @@ class AgendamentoController extends BaseController
             
             //$this->PacienteModel->save($paciente);
             $this->AgendamentoModel->save($data);
-        
 
+            $pacienteId = $this->AgendamentoModel->insertId();
+        
             if (\key_exists('agendamento_id', $this->request->getPost()))
                 $this->session->setFlashdata('success_notice', 'Agendamento atualizado com sucesso!');
             else
                 $this->session->setFlashdata('success_notice', 'Agendamento cadastrado com sucesso!');
 
-            return redirect()->to('/agendamento');
+            return redirect()->to('/agendamento/print-screen/'. $pacienteId);
         }
 
     }

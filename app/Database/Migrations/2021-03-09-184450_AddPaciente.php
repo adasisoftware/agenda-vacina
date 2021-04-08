@@ -27,9 +27,6 @@ class AddPaciente extends Migration
 			'data_nascimento' => [
 				'type' => 'DATE',
 			],
-			'idade' => [
-				'type' => 'INT',
-			],
 			'telefone' => [
 				'type' => 'VARCHAR',
 				'constraint' => '255',

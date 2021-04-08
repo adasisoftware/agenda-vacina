@@ -131,7 +131,7 @@ class AgendamentoController extends BaseController
 
             $data = [
                 'usuario_id' => $this->session->id,
-                'protocolo' => '1',
+                'protocolo' => $this->GerandoProtocolo(),
                 'paciente_id'  => trim($this->request->getPost('paciente_id')),
                 'grupo_id' => trim($this->request->getPost('grupo_id')),
                 'agenda_id' => trim($this->request->getPost('agenda')),
@@ -168,4 +168,29 @@ class AgendamentoController extends BaseController
 
         return $this->response->setJSON($pacientes);
     }
+
+    
+    function GerandoProtocolo($length = 9) {
+        $palavras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numeros = '0123456789';
+        $palavrasLength = strlen($palavras);
+        $numerosLength = strlen($numeros);
+        // $numerosAleatorio = '';
+        // $palavrasAleatoria = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $palavrasAleatoria1 = $palavras[rand(0, $palavrasLength - 1)];
+            $numerosAleatorio1 = $numeros[rand(0, $numerosLength - 1)];
+            $numerosAleatorio2 = $numeros[rand(0, $numerosLength - 1)];
+            $numerosAleatorio3= $numeros[rand(0, $numerosLength - 1)];
+            $palavrasAleatoria2 = $palavras[rand(0, $palavrasLength - 1)];
+            $palavrasAleatoria3 = $palavras[rand(0, $palavrasLength - 1)];
+            $numerosAleatorio4= $numeros[rand(0, $numerosLength - 1)];            
+        }
+         
+        $protocolo = $palavrasAleatoria1 . $numerosAleatorio1 . $numerosAleatorio2 . $numerosAleatorio3 . $palavrasAleatoria2 . $palavrasAleatoria3 . $numerosAleatorio4;
+        
+        return $protocolo;
+    }
+    
 }

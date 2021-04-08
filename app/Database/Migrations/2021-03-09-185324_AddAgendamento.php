@@ -27,12 +27,7 @@ class AddAgendamento extends Migration
 			'usuario_id' => [
 				'type' => 'INT',
 
-			],		
-			'protocolo' => [
-				'type' => 'VARCHAR',
-				'constraint' => '10',
-
-			],		
+			],			
 			'created_at date DEFAULT current_date NOT NULL ',				
 		]);
 		$this->forge->addKey('id', true);

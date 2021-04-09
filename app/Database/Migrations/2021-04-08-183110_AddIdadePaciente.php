@@ -19,6 +19,6 @@ class AddIdadePaciente extends Migration
 
 	public function down()
 	{
-		$this->forge->dropColumn('paciente', $fields);
+		$this->forge->dropColumn('paciente', 'idade');
 	}
 }

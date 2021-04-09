@@ -95,16 +95,18 @@ class PacienteController extends BaseController
         if ($this->request->getMethod() === 'post') {
     
             $form = $this->request->getPost();
-
+            $nascimento =  trim($this->request->getPost('data_nascimento'));
+            
+            $idade = $this->calculoIdade($nascimento);           
             $data = [
                 'nome' => trim($this->request->getPost('nome')),
                 'cpf' => unmaskString($this->request->getPost('cpf')),
-                'data_nascimento' => trim($this->request->getPost('data_nascimento')),
-                'idade' => trim($this->request->getPost('idade')),
+                'data_nascimento' => $nascimento,
+                'idade' => $idade,
                 'nome_mae' => trim($this->request->getPost('nome_mae')),
                 'telefone' => trim($this->request->getPost('telefone'))
             ];
-            
+     
             if (\key_exists('id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('id');
 
@@ -133,5 +135,27 @@ class PacienteController extends BaseController
         //o first tras so a linha da consulta
 
         return $this->response->setJSON($paciente);
+    }
+
+    public function calculoIdade($date_nascimento){
+
+        $data = explode("-", $date_nascimento);
+        
+        $anoNasc = $data[0];
+        $mesNasc = $data[1];
+        $diaNasc = $data[2];
+
+        $anoAtual   = date("Y");
+        $mesAtual   = date("m");
+        $diaAtual   = date("d");
+
+        $idade = $anoAtual - $anoNasc;
+
+        if($mesAtual < $mesNasc){
+            $idade -= 1;
+        }else if( ($mesAtual == $mesNasc) && ($diaAtual <= $diaNasc)){
+            $idade -= 1;
+        }
+        return $idade;
     }
 }

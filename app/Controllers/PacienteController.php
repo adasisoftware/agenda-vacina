@@ -95,11 +95,9 @@ class PacienteController extends BaseController
         if ($this->request->getMethod() === 'post') {
     
             $form = $this->request->getPost();
-
             $nascimento =  trim($this->request->getPost('data_nascimento'));
             
-            $idade = $this->calculoIdade($nascimento);
-            
+            $idade = $this->calculoIdade($nascimento);           
             $data = [
                 'nome' => trim($this->request->getPost('nome')),
                 'cpf' => unmaskString($this->request->getPost('cpf')),

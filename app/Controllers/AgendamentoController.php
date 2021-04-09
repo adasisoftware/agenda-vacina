@@ -126,7 +126,9 @@ class AgendamentoController extends BaseController
         $grupo = $this->GrupoModel->find($agendamento->grupo_id);
         $paciente = $this->PacienteModel->find($agendamento->paciente_id);
 
-        // dd($agendamento, $agenda, $grupo, $paciente);
+        $idade = $this->calculoIdade($paciente->data_nascimento);
+
+        $paciente->idade = $idade ; 
 
         return  $this->twig->render('agendamento/print.html.twig', [
             'agendamento' => $agendamento,
@@ -214,10 +216,32 @@ class AgendamentoController extends BaseController
             $palavrasAleatoria3 = $palavras[rand(0, $palavrasLength - 1)];
             $numerosAleatorio4= $numeros[rand(0, $numerosLength - 1)];            
         }
-         
+        
         $protocolo = $palavrasAleatoria1 . $numerosAleatorio1 . $numerosAleatorio2 . $numerosAleatorio3 . $palavrasAleatoria2 . $palavrasAleatoria3 . $numerosAleatorio4;
         
         return $protocolo;
+    }
+
+    public function calculoIdade($date_nascimento){
+
+        $data = explode("-", $date_nascimento);
+        
+        $anoNasc = $data[0];
+        $mesNasc = $data[1];
+        $diaNasc = $data[2];
+
+        $anoAtual   = date("Y");
+        $mesAtual   = date("m");
+        $diaAtual   = date("d");
+
+        $idade = $anoAtual - $anoNasc;
+
+        if($mesAtual < $mesNasc){
+            $idade -= 1;
+        }else if( ($mesAtual == $mesNasc) && ($diaAtual <= $diaNasc)){
+            $idade -= 1;
+        }
+        return $idade;
     }
     
 }

@@ -106,9 +106,7 @@ class PacienteController extends BaseController
                 'nome_mae' => trim($this->request->getPost('nome_mae')),
                 'telefone' => trim($this->request->getPost('telefone'))
             ];
-
-            dd($idade);
-            
+     
             if (\key_exists('id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('id');
 

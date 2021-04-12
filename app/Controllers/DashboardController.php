@@ -31,6 +31,7 @@ class DashboardController extends BaseController
 	 * @return void
 	 */
 	public function index()
+
 	{
 		$pacienteTotal = $this->pacienteModel->count();
 		$pacienteSemana = $this->pacienteModel->count_week();
@@ -39,7 +40,6 @@ class DashboardController extends BaseController
 
 		$ListaDeAgendamentos = $this->agendamentoModel->getListAllDashboard();
 
-		// dd($ListaDeAgendamentos);
 
 		return $this->twig->render('dashboard/index.html.twig',[
 			'pacienteTotal' => $pacienteTotal,

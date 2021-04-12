@@ -15,7 +15,19 @@ class AgendamentoModel extends Model{
         'protocolo',
     ];
 
+
+
     protected $returnType = 'object';
+
+    public function getAgendamento(){
+        return $this->db->table($this->table)
+                        ->select("count(*) qtde, date(created_at)")
+                        ->where(" EXTRACT( MONTH from created_at ) = EXTRACT( MONTH from CURRENT_DATE ) and EXTRACT( YEAR from created_at ) = EXTRACT( YEAR from CURRENT_DATE )")
+                        ->groupBy("created_at")
+                        ->orderBy("created_at")
+                        ->get()
+                        ->getResult();
+    }
 
     public function count()
     {

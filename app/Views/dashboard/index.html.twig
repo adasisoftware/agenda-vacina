@@ -143,57 +143,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                     </div>
                     <div class="card-body">
-                       <canvas id="myChart" width="100" height="50"></canvas>
-                        <script>
-
-
-                            
-                            var Xmas95 = new Date('April 25, 1995 23:15:30');
-                            var month = Xmas95.getMonth();
-                            var year = Xmas95.getYear();
-                            
-                            var lastday = function(year,month){
-                                return  new Date(year, month +1, 0).getDate();
-                            }
-                            console.log(lastday());
-                            
-
-                            var ctx = document.getElementById('myChart');
-                            var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['1', '2', '3', '4', '5','6'],
-                                datasets: [{
-                                    label: '# of Votes',
-                                    data: [0,30,10],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(54, 162, 235, 0.2)',
-                                        'rgba(255, 206, 86, 0.2)',
-                                        'rgba(75, 192, 192, 0.2)',
-                                        'rgba(153, 102, 255, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                        </script>
+                        <canvas id="myChart" width="100" height="50"></canvas>
                     </div>
                 </div>
             </div>
@@ -394,4 +344,59 @@
             </div> #}
     </div>
     <!-- /.container-fluid -->
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+
+        {# ninguem esta chaamndo ela #}
+        function getCountDataByAgendamento(){
+            
+            {# ele pega o resultado da query #}
+            $.ajax({
+                url: 'agendamento/get-count-data-by-agendamento',
+                type: 'GET',
+                dataType: 'json',
+            }).done(function(result){
+
+                console.log(result);
+
+                var grafico = document.getElementById('myChart');
+                var myChart = new Chart(grafico, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1', '2', '3', '4', '5','6'],
+                        datasets: [{
+                        label: 'Agendamentos do mês',
+                        data: [0,30,10],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+        }
+    </script>
 {% endblock %}

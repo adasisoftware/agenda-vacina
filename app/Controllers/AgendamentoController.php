@@ -243,5 +243,13 @@ class AgendamentoController extends BaseController
         }
         return $idade;
     }
+
+    public function getCountDataByAgendamento(){
+
+        $query = $this->AgendamentoModel->getAgendamentoData();
+
+        return $this->response->setJSON($query);
+
+    }
     
 }

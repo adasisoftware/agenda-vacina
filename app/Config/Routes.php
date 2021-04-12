@@ -57,6 +57,7 @@ $routes->post('/agendamento/excluir/(:alphanum)', 'AgendamentoController::delete
 $routes->get('/agendamento/editar/(:alphanum)', 'AgendamentoController::update/$1');
 $routes->get('/agendamento/get-by-paciente/(:alphanum)', 'AgendamentoController::getByPaciente/$1');
 $routes->get('/agendamento/print-screen/(:alphanum)', 'AgendamentoController::printScreen/$1');
+$routes->get('/agendamento/get-count-data-by-agendamento', 'AgendamentoController::getCountDataByAgendamento');
 
 // routs grupo
 $routes->get('/grupo', 'GrupoController::index');

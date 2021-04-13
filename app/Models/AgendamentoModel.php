@@ -21,7 +21,7 @@ class AgendamentoModel extends Model{
 
     public function getAgendamentoData(){
         return $this->db->table($this->table)
-                        ->select("count(*) qtde, date(created_at)")
+                        ->select("count(*) qtde, extract(day from date(created_at)) dia")
                         ->where(" EXTRACT( MONTH from created_at ) = EXTRACT( MONTH from CURRENT_DATE ) and EXTRACT( YEAR from created_at ) = EXTRACT( YEAR from CURRENT_DATE )")
                         ->groupBy("created_at")
                         ->orderBy("created_at")

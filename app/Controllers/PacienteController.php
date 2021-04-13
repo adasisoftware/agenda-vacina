@@ -96,17 +96,14 @@ class PacienteController extends BaseController
     
             $form = $this->request->getPost();
             $nascimento =  trim($this->request->getPost('data_nascimento'));
-            
-            $idade = $this->calculoIdade($nascimento);           
+                    
             $data = [
                 'nome' => trim($this->request->getPost('nome')),
                 'cpf' => unmaskString($this->request->getPost('cpf')),
                 'data_nascimento' => $nascimento,
-                'idade' => $idade,
                 'nome_mae' => trim($this->request->getPost('nome_mae')),
                 'telefone' => trim($this->request->getPost('telefone'))
             ];
-     
             if (\key_exists('id', $this->request->getPost()))
                 $data['id'] = $this->request->getPost('id');
 

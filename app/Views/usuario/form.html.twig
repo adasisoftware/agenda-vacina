@@ -25,8 +25,8 @@
 					<div class="form-group row">
 						<div class="col-sm-12 mb-3 mb-sm-0">
 							<input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Email" value="{{ usuario is defined ? usuario.email : ''}}">
-							<span id="email_invalido" class="d-none text-danger">Emial já cadastrado</span>
-							<span id="email_valido" class="d-none text-success">Emial valido</span>
+							<span id="email_invalido" class="d-none text-danger">Email já cadastrado</span>
+							<span id="email_valido" class="d-none text-success">Email valido</span>
 						</div>
 					</div>
 
@@ -73,10 +73,12 @@
 						.done(function(result){
 							
 							if(result != null){
+								$('.btn-user').attr('disabled',true);
 								$('#email').addClass("is-invalid");
 								$('#email_valido').removeClass("d-block").addClass("d-none");
 								$('#email_invalido').removeClass("d-none").addClass("d-block");
 							}else{
+								$('.btn-user').attr('disabled',false);
 								$('#email').removeClass("is-invalid").addClass("is-valid");
 								$('#email_invalido').removeClass("d-block").addClass("d-none");
 								$('#email_valido').removeClass("d-none").addClass("d-block");

@@ -57,11 +57,9 @@ class AgendamentoController extends BaseController
      * @return void
      */
     public function create(){
-        $agenda = $this->AgendaModel->where("data_hora >= CURRENT_TIMESTAMP")->find();
+        $agenda = $this->AgendaModel->findAll();
         $grupos = $this->GrupoModel->findAll();
         $pacientes = $this->PacienteModel->findAll();
-
-        dd($agenda);
 
         return $this->twig->render('agendamento/form.html.twig',[
             'title' => 'Crie um novo agendamento aqui!',

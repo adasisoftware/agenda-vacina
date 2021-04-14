@@ -183,8 +183,10 @@ class AgendaController extends BaseController
     public function getByGrupoVerification(string $grupo ){
 
         $agendas = $this->AgendaModel->where([
-            'grupo_id' => $grupo
-        ])->findAll();
+            'grupo_id' => $grupo, 
+        ])
+        ->where('data_hora >= CURRENT_TIMESTAMP', null, false)
+        ->findAll();
 
         $agendas_result = [];
 

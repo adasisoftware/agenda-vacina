@@ -15,8 +15,6 @@ class AgendamentoModel extends Model{
         'protocolo',
     ];
 
-
-
     protected $returnType = 'object';
 
     public function getAgendamentoData(){

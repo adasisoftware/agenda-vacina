@@ -251,5 +251,15 @@ class AgendamentoController extends BaseController
         return $this->response->setJSON($query);
 
     }
+
+    
+    public function getAgendaByAgendaId($agenda_id){
+
+        $agenda = $this->AgendamentoModel->where([
+            'agenda_id' => $agenda_id
+        ])->find();
+
+        return $this->response->setJSON($agenda);
+    }
     
 }

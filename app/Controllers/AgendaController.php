@@ -212,11 +212,4 @@ class AgendaController extends BaseController
 
     }
 
-    public function getAgendaById($id){
-
-        $agenda = $this->AgendaModel->find($id);
-
-        return $this->response->setJSON($agenda);
-    }
-
 }

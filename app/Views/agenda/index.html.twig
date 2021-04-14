@@ -87,7 +87,7 @@
 			paramentros = {"id": id}
 			$.ajax({
 				data: paramentros,
-				url: '{{ base_url('/agenda/get-by-id') }}/' + id,
+				url: '{{ base_url('/agendamento/get-by-agenda_id') }}/' + id,
 				type: 'GET',
 				dataType: 'json',
 			}).done(function(result){

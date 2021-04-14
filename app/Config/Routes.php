@@ -48,7 +48,7 @@ $routes->get('/agenda/get-by-grupo-verification/(:alphanum)', 'AgendaController:
 $routes->get('/agenda/get-by-grupo/(:alphanum)', 'AgendaController::getByGrupo/$1');
 $routes->get('/agenda/copiar/(:alphanum)', 'AgendaController::copy/$1');
 $routes->get('/agenda/verification-edit-vagas/(:alphanum)', 'AgendaController::verificationEditVagas/$1');
-$routes->get('/agenda/get-by-id/(:alphanum)', 'AgendaController::getAgendaById/$1');
+
 
 //agendamento
 $routes->get('/agendamento', 'AgendamentoController::index');
@@ -59,6 +59,7 @@ $routes->get('/agendamento/editar/(:alphanum)', 'AgendamentoController::update/$
 $routes->get('/agendamento/get-by-paciente/(:alphanum)', 'AgendamentoController::getByPaciente/$1');
 $routes->get('/agendamento/print-screen/(:alphanum)', 'AgendamentoController::printScreen/$1');
 $routes->get('/agendamento/get-count-data-by-agendamento', 'AgendamentoController::getCountDataByAgendamento');
+$routes->get('/agendamento/get-by-agenda_id/(:alphanum)', 'AgendamentoController::getAgendaByAgendaId/$1');
 
 // routs grupo
 $routes->get('/grupo', 'GrupoController::index');

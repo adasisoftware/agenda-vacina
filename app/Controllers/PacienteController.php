@@ -38,7 +38,6 @@ class PacienteController extends BaseController
             $paciente->idade = $idade;
         }
         
-        // dd($pacientes);
 		return $this->twig->render('paciente/index.html.twig',[
             'title' => 'Pacientes do sistema',
             'paciente' => $pacientes,

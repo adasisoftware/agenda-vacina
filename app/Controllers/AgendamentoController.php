@@ -57,9 +57,11 @@ class AgendamentoController extends BaseController
      * @return void
      */
     public function create(){
+        
         $agenda = $this->AgendaModel->findAll();
         $grupos = $this->GrupoModel->findAll();
         $pacientes = $this->PacienteModel->findAll();
+
 
         return $this->twig->render('agendamento/form.html.twig',[
             'title' => 'Crie um novo agendamento aqui!',
@@ -169,16 +171,28 @@ class AgendamentoController extends BaseController
                 $data['id'] = $this->request->getPost('agendamento_id');
             
             //$this->PacienteModel->save($paciente);
-            $this->AgendamentoModel->save($data);
+            $dataNascimento = $paciente['data_nascimento']; // pegando a idade do paciente
 
-            $pacienteId = $this->AgendamentoModel->insertId();
+            $idGrupo = $data['grupo_id'];   // pegando o id do grupo
+
+            $grupo = $this->GrupoModel->where('id =', $idGrupo)->findAll(); // selecionando o grupo pelo o id
+
+            $valorIdade = $this->calculoIdade($dataNascimento); // calculando a idade
+       
+            if($grupo[0]->idade_min <= $valorIdade && $grupo[0]->idade_max >= $valorIdade){
+                $this->AgendamentoModel->save($data);
+                $pacienteId = $this->AgendamentoModel->insertId();
         
-            if (\key_exists('agendamento_id', $this->request->getPost()))
-                $this->session->setFlashdata('success_notice', 'Agendamento atualizado com sucesso!');
-            else
-                $this->session->setFlashdata('success_notice', 'Agendamento cadastrado com sucesso!');
-
-            return redirect()->to('/agendamento/print-screen/'. $pacienteId);
+                if (\key_exists('agendamento_id', $this->request->getPost()))
+                    $this->session->setFlashdata('success_notice', 'Agendamento atualizado com sucesso!');
+                else
+                    $this->session->setFlashdata('success_notice', 'Agendamento cadastrado com sucesso!');
+    
+                return redirect()->to('/agendamento/print-screen/'. $pacienteId);
+            }else{
+                echo "<script>alert('Idade do Paciente não é compativel com a idade do grupo.');</script>";
+                echo "<script>javascript:window.location='novo';</script>";
+            }                      
         }
 
     }
@@ -251,5 +265,5 @@ class AgendamentoController extends BaseController
         return $this->response->setJSON($query);
 
     }
-    
+
 }

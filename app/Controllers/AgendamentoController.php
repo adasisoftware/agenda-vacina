@@ -190,8 +190,8 @@ class AgendamentoController extends BaseController
     
                 return redirect()->to('/agendamento/print-screen/'. $pacienteId);
             }else{
-                $this->session->setFlashdata('warning_notice', 'Idade do Paciente não é compativel com a idade do grupo.');
-                return  redirect()->to('/agendamento/novo');           
+                $this->session->setFlashdata('error_notice', 'Idade do Paciente não é compativel com a idade do grupo.');
+                return  redirect()->to('/agendamento/novo')->withInput();           
             }                      
         }
 

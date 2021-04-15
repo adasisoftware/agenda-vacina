@@ -98,6 +98,20 @@
     <!-- Custom scripts for all pages-->
     <script src=" {{base_url('assets/js/sb-admin-2.min.js')}}"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+		{% if session.warning_notice %}
+			{# alert('{{ session.warning_notice }}'); #}
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: '{{ session.warning_notice }}',
+			})
+		{% endif %}			
+	</script>
+
 </body>
 
 </html>

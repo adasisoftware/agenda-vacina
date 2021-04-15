@@ -41,8 +41,10 @@ class Auth extends BaseController
             ->first();    
 
         if (!$user || !password_verify($data['senha'], $user->senha)) {
-            echo "<script>alert('E-mail e Senha Incorretos!');</script>";
-            return $this->twig->render('auth/login.html.twig');
+            $this->session->setFlashdata('warning_notice', 'E-mail e Senha Incorretos!');
+            return  redirect()->to('/');
+            // echo "<script>alert('E-mail e Senha Incorretos!');</script>";
+            // return $this->twig->render('auth/login.html.twig');
         } else {
             $this->session->set([
                 'email' => $this->request->getPost('email'),

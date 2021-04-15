@@ -144,15 +144,27 @@ class AgendaController extends BaseController
                 'data_hora' => $data_time['data'].' '.$data_time['hora'],
             ];
 
-            if (\key_exists('id', $this->request->getPost()))
-                $data['id'] = $this->request->getPost('id');
-            
-            $this->AgendaModel->save($data);
+            if (\key_exists('id', $this->request->getPost())){
 
-            if (\key_exists('id', $this->request->getPost()))
+                $data['id'] = $this->request->getPost('id');
+
+                $agendaAntiga = $this->AgendaModel->find($data['id']);
+                $agendados = $this->AgendamentoModel->countAgendados($agendaAntiga->id);
+
+                if($agendados > $data['vagas']){
+                    $this->session->setFlashdata('error_notice', 'O numero de vagas tem q ser maior ou igual há'. $agendados);
+
+                    return redirect()->to('editar/'. $data['id']);
+                }else{
+                    $this->AgendaModel->save($data);
+                }
+            }
+
+            if (\key_exists('id', $this->request->getPost())){
                 $this->session->setFlashdata('success_notice', 'Agenda atualizado com sucesso!');
-            else
+            }else{
                 $this->session->setFlashdata('success_notice', 'Agenda cadastrado com sucesso!');
+            }
 
             return redirect()->to('/agenda');
         }
@@ -202,16 +214,22 @@ class AgendaController extends BaseController
         return $this->response->setJSON($agendas_result);
     }
 
-    public function verificationEditVagas(string $id_agenda){
+    // /**
+    //  * tras os dados da agenda atual e o count dos agendados naquela agenda
+    //  *
+    //  * @param string $id_agenda
+    //  * @return void
+    //  */
+    // public function verificationEditVagas(string $id_agenda){
         
-        $agendaAntiga = $this->AgendaModel->find($id_agenda);
-        $agendados = $this->AgendamentoModel->countAgendados($agendaAntiga->id);
+    //     $agendaAntiga = $this->AgendaModel->find($id_agenda);
+    //     $agendados = $this->AgendamentoModel->countAgendados($agendaAntiga->id);
         
-        return $this->response->setJSON([
-            'agendaAntiga' => $agendaAntiga,
-            'agendados' => $agendados
-        ]);
+    //     return $this->response->setJSON([
+    //         'agendaAntiga' => $agendaAntiga,
+    //         'agendados' => $agendados
+    //     ]);
 
-    }
+    // }
 
 }

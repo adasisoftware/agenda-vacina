@@ -18,25 +18,25 @@
 					{% endif %}
 					<div class="form-group row">
 						<div class="col-sm-12 mb-3 mb-sm-0">
-							<input type="text" class="form-control form-control-user" id="nome" name="nome" placeholder="Nome" value="{{ paciente is defined ? paciente.nome : ''}}">
+							<input type="text" class="form-control form-control-user" id="nome" name="nome" placeholder="Nome" value="{{ paciente is defined ? paciente.nome : ''}}" required>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input type="text" class="form-control form-control-user" id="cpf" name="cpf" placeholder="CPF" value="{{ paciente is defined ? paciente.cpf : ''}}">
+							<input type="text" class="form-control form-control-user" id="cpf" name="cpf" placeholder="CPF" value="{{ paciente is defined ? paciente.cpf : ''}}" required>
 							<span id="cpf_invalido" class="d-none text-danger">CPF INVALIDO</span>
 							<span id="cpf_valido" class="d-none text-success">CPF VALIDO</span>
 						</div>						
 						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input type="date" class="form-control form-control-user" id="data_nascimento" name="data_nascimento" placeholder="Data de Nacimento" value="{{ paciente is defined ? paciente.data_nascimento : ''}}">
+							<input type="date" class="form-control form-control-user" id="data_nascimento" name="data_nascimento" placeholder="Data de Nacimento" value="{{ paciente is defined ? paciente.data_nascimento : ''}}" required>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input type="text" class="form-control form-control-user" id="nome_mae" name="nome_mae" placeholder="Nome da Mãe" value="{{ paciente is defined ? paciente.nome_mae : ''}}">
+							<input type="text" class="form-control form-control-user" id="nome_mae" name="nome_mae" placeholder="Nome da Mãe" value="{{ paciente is defined ? paciente.nome_mae : ''}}" required>
 						</div>
 						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input type="text" class="form-control form-control-user" id="telefone" name="telefone" placeholder="Telefone" value="{{ paciente is defined ? paciente.telefone : ''}}">
+							<input type="text" class="form-control form-control-user" id="telefone" name="telefone" placeholder="Telefone" value="{{ paciente is defined ? paciente.telefone : ''}}" required>
 						</div>
 					</div>
 

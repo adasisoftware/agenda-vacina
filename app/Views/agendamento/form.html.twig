@@ -161,6 +161,14 @@
             Page.init();
         });
 
+		{% if session.warning_notice %}
+			{# alert('{{ session.warning_notice }}'); #}
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: '{{ session.warning_notice }}',
+			})
+		{% endif %}			
 
         
 	</script>

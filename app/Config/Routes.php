@@ -36,53 +36,64 @@ $routes->get('/', 'Auth::index');
 $routes->post('/login', 'Auth::logar');
 $routes->get('/login/logout', 'Auth::logout');
 
-$routes->get('/dashboard', 'DashboardController::index');
+$routes->group('dashboard', ['filter' => 'authFilter'], function ($routes) {
+	$routes->get('', 'DashboardController::index');
+});
 
 //agenda
-$routes->get('/agenda', 'AgendaController::index');
-$routes->get('/agenda/novo', 'AgendaController::create');
-$routes->post('/agenda/save', 'AgendaController::save');
-$routes->post('/agenda/excluir/(:alphanum)', 'AgendaController::delete/$1');
-$routes->get('/agenda/editar/(:alphanum)', 'AgendaController::update/$1');
-$routes->get('/agenda/get-by-grupo-verification/(:alphanum)', 'AgendaController::getByGrupoVerification/$1');
-$routes->get('/agenda/get-by-grupo/(:alphanum)', 'AgendaController::getByGrupo/$1');
-$routes->get('/agenda/copiar/(:alphanum)', 'AgendaController::copy/$1');
-$routes->get('/agenda/verification-edit-vagas/(:alphanum)', 'AgendaController::verificationEditVagas/$1');
-
+$routes->group('agenda', ['filter' => 'authFilter'], function ($routes) {
+	$routes->get('', 'AgendaController::index');
+	$routes->get('novo', 'AgendaController::create');
+	$routes->post('save', 'AgendaController::save');
+	$routes->post('excluir/(:alphanum)', 'AgendaController::delete/$1');
+	$routes->get('editar/(:alphanum)', 'AgendaController::update/$1');
+	$routes->get('get-by-grupo-verification/(:alphanum)', 'AgendaController::getByGrupoVerification/$1');
+	$routes->get('get-by-grupo/(:alphanum)', 'AgendaController::getByGrupo/$1');
+	$routes->get('copiar/(:alphanum)', 'AgendaController::copy/$1');
+	$routes->get('verification-edit-vagas/(:alphanum)', 'AgendaController::verificationEditVagas/$1');
+});
 
 //agendamento
-$routes->get('/agendamento', 'AgendamentoController::index');
-$routes->get('/agendamento/novo', 'AgendamentoController::create');
-$routes->post('/agendamento/save', 'AgendamentoController::save');
-$routes->post('/agendamento/excluir/(:alphanum)', 'AgendamentoController::delete/$1');
-$routes->get('/agendamento/editar/(:alphanum)', 'AgendamentoController::update/$1');
-$routes->get('/agendamento/get-by-paciente/(:alphanum)', 'AgendamentoController::getByPaciente/$1');
-$routes->get('/agendamento/print-screen/(:alphanum)', 'AgendamentoController::printScreen/$1');
-$routes->get('/agendamento/get-count-data-by-agendamento', 'AgendamentoController::getCountDataByAgendamento');
-$routes->get('/agendamento/get-by-agenda_id/(:alphanum)', 'AgendamentoController::getAgendaByAgendaId/$1');
+$routes->group('agendamento', ['filter' => 'authFilter'], function ($routes) {
+	$routes->get('', 'AgendamentoController::index');
+	$routes->get('novo', 'AgendamentoController::create');
+	$routes->post('save', 'AgendamentoController::save');
+	$routes->post('excluir/(:alphanum)', 'AgendamentoController::delete/$1');
+	$routes->get('editar/(:alphanum)', 'AgendamentoController::update/$1');
+	$routes->get('get-by-paciente/(:alphanum)', 'AgendamentoController::getByPaciente/$1');
+	$routes->get('print-screen/(:alphanum)', 'AgendamentoController::printScreen/$1');
+	$routes->get('get-count-data-by-agendamento', 'AgendamentoController::getCountDataByAgendamento');
+	$routes->get('get-by-agenda_id/(:alphanum)', 'AgendamentoController::getAgendaByAgendaId/$1');
+});
 
 // routs grupo
-$routes->get('/grupo', 'GrupoController::index');
-$routes->get('/grupo/novo', 'GrupoController::create');
-$routes->post('/grupo/save', 'GrupoController::save');
-$routes->post('/grupo/excluir/(:alphanum)', 'GrupoController::delete/$1');
-$routes->get('/grupo/editar/(:alphanum)', 'GrupoController::update/$1');
+$routes->group('grupo', ['filter' => 'authFilter'], function ($routes) {
+	$routes->get('', 'GrupoController::index');
+	$routes->get('novo', 'GrupoController::create');
+	$routes->post('save', 'GrupoController::save');
+	$routes->post('excluir/(:alphanum)', 'GrupoController::delete/$1');
+	$routes->get('editar/(:alphanum)', 'GrupoController::update/$1');
+});
 
 // rots usuario
-$routes->get('/usuario', 'UsuarioController::index');
-$routes->get('/usuario/novo', 'UsuarioController::create');
-$routes->get('/usuario/editar/(:alphanum)', 'UsuarioController::update/$1');
-$routes->post('/usuario/save', 'UsuarioController::save');
-$routes->post('/usuario/excluir/(:alphanum)', 'UsuarioController::delete/$1');
-$routes->post('/usuario/get-by-email', 'UsuarioController::getByEmail');
+$routes->group('usuario', ['filter' => 'authFilter'], function ($routes) {
+	$routes->get('', 'UsuarioController::index');
+	$routes->get('novo', 'UsuarioController::create');
+	$routes->get('editar/(:alphanum)', 'UsuarioController::update/$1');
+	$routes->post('save', 'UsuarioController::save');
+	$routes->post('excluir/(:alphanum)', 'UsuarioController::delete/$1');
+	$routes->post('get-by-email', 'UsuarioController::getByEmail');
+});
 
 // rots paciente
-$routes->get('/paciente', 'PacienteController::index');
-$routes->get('/paciente/novo', 'PacienteController::create');
-$routes->get('/paciente/editar/(:alphanum)', 'PacienteController::update/$1');
-$routes->post('/paciente/save', 'PacienteController::save');
-$routes->post('paciente/get-by-cpf', 'PacienteController::getByCpf');
-$routes->post('/paciente/excluir/(:alphanum)', 'PacienteController::delete/$1');
+$routes->group('paciente', ['filter' => 'authFilter'], function ($routes) {
+	$routes->get('', 'PacienteController::index');
+	$routes->get('novo', 'PacienteController::create');
+	$routes->get('editar/(:alphanum)', 'PacienteController::update/$1');
+	$routes->post('save', 'PacienteController::save');
+	$routes->post('get-by-cpf', 'PacienteController::getByCpf');
+	$routes->post('excluir/(:alphanum)', 'PacienteController::delete/$1');
+});
 
 /*
  * --------------------------------------------------------------------
